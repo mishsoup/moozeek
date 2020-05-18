@@ -2,8 +2,7 @@ package ast;
 
 import libs.Node;
 
-public class PROGRAM extends Node {
-
+public class JOIN extends Node {
     @Override
     public void parse() {
 

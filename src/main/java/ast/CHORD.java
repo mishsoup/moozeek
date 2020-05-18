@@ -2,8 +2,7 @@ package ast;
 
 import libs.Node;
 
-public class PROGRAM extends Node {
-
+public class CHORD extends Node {
     @Override
     public void parse() {
 
