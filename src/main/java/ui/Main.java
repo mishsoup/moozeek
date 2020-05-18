@@ -7,5 +7,7 @@ public class Main {
         // TODO: Please try to run this to confirm the dependency works well
         Player p = new Player();
         p.play("I[Piano] Aq Bq Cq Dq Eq Fq Gq");
+
+
     }
 }

@@ -2,7 +2,7 @@ package ast;
 
 import libs.Node;
 
-public class CREATE extends Node {
+public class CREATE extends INSTRUCTION {
     @Override
     public void parse() {
 
