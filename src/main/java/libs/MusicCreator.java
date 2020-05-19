@@ -18,12 +18,18 @@ public class MusicCreator {
     }
 
     public Pattern createMusic(SOUND sound) {
-        String instrument = sound.getInstrument().instrument;
+        StringBuilder musicString = new StringBuilder();
 
-        //TODO have to figure out how beat works
+        //TODO have to figure out how beat works add add it here
+
+        String instrument = sound.getInstrument().instrument;
+        //append the instrument first
+        musicString.append("V0 I["+ instrument +"]");
 
         List<BASEKEY> baseSound = sound.getBaseSound().chords;
+        for (BASEKEY eachKey: baseSound) {
 
+        }
         return null;
     }
 

@@ -1,11 +1,10 @@
 package ast;
 
 public class CHORD extends BASEKEY {
-    String chord;
-    LENGTH length = new LENGTH();
     @Override
     public void parse() {
-        chord = tokenizer.getNext();
+        length = new LENGTH();
+        theNote = tokenizer.getNext();
         tokenizer.getAndCheckNext(",");
         length.parse();
     }
