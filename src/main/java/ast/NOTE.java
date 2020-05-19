@@ -1,13 +1,11 @@
 package ast;
 
-import libs.Node;
-
-public class CHORD extends BASEKEY {
-    String chord;
+public class NOTE extends BASEKEY {
+    String note;
     LENGTH length = new LENGTH();
     @Override
     public void parse() {
-        chord = tokenizer.getNext();
+        note = tokenizer.getNext();
         tokenizer.getAndCheckNext(",");
         length.parse();
     }

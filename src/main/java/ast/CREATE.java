@@ -1,7 +1,5 @@
 package ast;
 
-import libs.Node;
-
 public class CREATE extends INSTRUCTION {
     NAME name = new NAME();
     SOUND sound = new SOUND();

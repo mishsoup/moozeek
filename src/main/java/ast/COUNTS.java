@@ -2,11 +2,11 @@ package ast;
 
 import libs.Node;
 
-public class LENGTH extends Node {
-    String length;
+public class COUNTS extends Node {
+    String num;
     @Override
     public void parse() {
-        length = tokenizer.getNext();
+        num = tokenizer.getNext();
     }
 
     @Override

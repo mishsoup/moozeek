@@ -1,14 +1,10 @@
 package ast;
 
-import libs.Node;
-
-public class CHORD extends BASEKEY {
-    String chord;
+public class REST extends BASEKEY {
     LENGTH length = new LENGTH();
     @Override
     public void parse() {
-        chord = tokenizer.getNext();
-        tokenizer.getAndCheckNext(",");
+        tokenizer.getAndCheckNext("REST");
         length.parse();
     }
 

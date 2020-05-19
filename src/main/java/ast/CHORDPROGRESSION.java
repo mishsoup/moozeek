@@ -3,21 +3,20 @@ package ast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MELODY extends BASESOUND {
-    List<BASEKEY> notes = new ArrayList<>();
-
+public class CHORDPROGRESSION extends BASESOUND {
+    List<BASEKEY> chords = new ArrayList<>();
     @Override
     public void parse() {
-        tokenizer.getAndCheckNext("MELODY:");
+        tokenizer.getAndCheckNext("CHORD:");
         while(!tokenizer.checkToken("}")) {
             BASEKEY key = null;
             if (tokenizer.checkToken("REST")) {
                 key = new REST();
             } else {
-                key = new NOTE();
+                key = new CHORD();
             }
             key.parse();
-            notes.add(key);
+            chords.add(key);
         }
     }
 
