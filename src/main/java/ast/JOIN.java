@@ -5,7 +5,7 @@ import java.util.List;
 
 public class JOIN extends INSTRUCTION {
     List<NAME> subNames = new ArrayList<>();
-    NAME majorName = new NAME();
+    NAME name = new NAME();
 
     @Override
     public void parse() {
@@ -24,7 +24,7 @@ public class JOIN extends INSTRUCTION {
             subNames.add(subName);
         }
         tokenizer.getAndCheckNext("INTO");
-        majorName.parse();
+        name.parse();
     }
 
     @Override
