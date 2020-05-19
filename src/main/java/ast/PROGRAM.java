@@ -31,7 +31,7 @@ public class PROGRAM extends Node {
     @Override
     public void evaluate() {
         for (INSTRUCTION eachInstruction: instructions) {
-            eachInstruction.parse();
+            eachInstruction.evaluate();
         }
 
     }
