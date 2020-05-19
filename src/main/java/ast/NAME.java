@@ -2,12 +2,11 @@ package ast;
 
 import libs.Node;
 
-public class INSTRUMENT extends Node {
-    String instrument;
-
+public class NAME extends Node {
+    String name;
     @Override
     public void parse() {
-        instrument = tokenizer.getNext();
+        name = tokenizer.getNext();
     }
 
     @Override

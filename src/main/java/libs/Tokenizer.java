@@ -18,7 +18,7 @@ public class Tokenizer {
     private void tokenize() {}
     private String checkNext() {return "";}
     public String getNext() {return "";}
-    public boolean checkToen(String regexp) {return false;}
+    public boolean checkToken(String regexp) {return false;}
     public String getAndCheckNext(String regexp) {return "";}
     public boolean moreToken() {return false;}
 
