@@ -23,6 +23,18 @@ public class SOUND extends Node {
         tokenizer.getAndCheckNext("}");
     }
 
+    public INSTRUMENT getInstrument() {
+        return instrument;
+    }
+
+    public BEAT getBeat() {
+        return beat;
+    }
+
+    public BASESOUND getBaseSound() {
+        return baseSound;
+    }
+
     @Override
     public void evaluate() {
 

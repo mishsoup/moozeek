@@ -2,4 +2,9 @@ package ast;
 
 import libs.Node;
 
-public abstract class BASESOUND extends Node {}
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class BASESOUND extends Node {
+    public List<BASEKEY> chords = new ArrayList<>();
+}

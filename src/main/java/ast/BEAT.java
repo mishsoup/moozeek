@@ -3,10 +3,9 @@ package ast;
 import libs.Node;
 
 public class BEAT extends Node {
-    COUNTS counts = new COUNTS();
-    COUNTVALUE countvalue = new COUNTVALUE();
-    // TODO have not idea about the name
-    String finalValue;
+    public COUNTS counts = new COUNTS();
+    public COUNTVALUE countvalue = new COUNTVALUE();
+    public String finalValue;
     @Override
     public void parse() {
         counts.parse();

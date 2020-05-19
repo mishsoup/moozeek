@@ -3,7 +3,7 @@ package ast;
 import libs.Node;
 
 public class INSTRUMENT extends Node {
-    String instrument;
+    public String instrument;
 
     @Override
     public void parse() {

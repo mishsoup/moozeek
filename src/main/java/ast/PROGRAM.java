@@ -1,7 +1,6 @@
 package ast;
 
 import libs.Node;
-import org.jfugue.pattern.PatternProducer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,5 +33,6 @@ public class PROGRAM extends Node {
             eachInstruction.evaluate();
         }
 
+        play.evaluate();
     }
 }

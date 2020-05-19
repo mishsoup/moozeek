@@ -1,8 +1,13 @@
 package libs;
 
+import ast.BASEKEY;
+import ast.BASESOUND;
+import ast.SOUND;
+import org.jfugue.pattern.Pattern;
 import org.jfugue.pattern.PatternProducer;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MusicCreator {
@@ -10,6 +15,16 @@ public class MusicCreator {
 
     public void addMusic(String name, PatternProducer pattern) {
         songs.put(name, pattern);
+    }
+
+    public Pattern createMusic(SOUND sound) {
+        String instrument = sound.getInstrument().instrument;
+
+        //TODO have to figure out how beat works
+
+        List<BASEKEY> baseSound = sound.getBaseSound().chords;
+
+        return null;
     }
 
 }

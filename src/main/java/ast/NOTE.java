@@ -12,6 +12,5 @@ public class NOTE extends BASEKEY {
 
     @Override
     public void evaluate() {
-
     }
 }
