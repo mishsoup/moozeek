@@ -1,7 +1,5 @@
 package ast;
 
-import libs.Node;
-
 public class CHORD extends BASEKEY {
     String chord;
     LENGTH length = new LENGTH();

@@ -8,8 +8,10 @@ import java.util.List;
 public class Tokenizer {
     private static String program;
     private static Tokenizer globalTokenizer;
-    private static List<String> keyWords = Arrays.asList("START");
+    private static List<String> keyWords = Arrays.asList("START", ",", "{", "}", "PLAY", "JOIN", "CREATE", "INTO",
+            "MELODY:", "REST", "CHORD:", "/");
     private int currentTokenIndex = 0;
+    private String[] tokens;
 
     private Tokenizer(String fileName) {
 

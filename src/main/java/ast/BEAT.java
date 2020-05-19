@@ -12,6 +12,7 @@ public class BEAT extends Node {
         counts.parse();
         tokenizer.getAndCheckNext("/");
         countvalue.parse();
+        tokenizer.getAndCheckNext(",");
         finalValue = tokenizer.getNext();
     }
 
