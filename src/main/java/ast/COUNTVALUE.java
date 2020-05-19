@@ -2,9 +2,6 @@ package ast;
 
 import libs.Node;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class COUNTVALUE extends Node {
     String value;
     // values we use for evaluate

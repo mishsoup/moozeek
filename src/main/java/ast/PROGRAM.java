@@ -12,7 +12,7 @@ public class PROGRAM extends Node {
     @Override
     public void parse() {
         tokenizer.getAndCheckNext("START");
-        while(tokenizer.moreToken() && !tokenizer.checkToken("PLAY")) {
+        while(!tokenizer.checkToken("PLAY")) {
             INSTRUCTION instruction = null;
             if (tokenizer.checkToken("JOIN")) {
                 instruction = new JOIN();
@@ -27,6 +27,5 @@ public class PROGRAM extends Node {
 
     @Override
     public void evaluate() {
-
     }
 }
