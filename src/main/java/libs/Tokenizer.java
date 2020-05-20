@@ -1,12 +1,7 @@
 package libs;
 
-import org.jfugue.pattern.PatternProducer;
-import org.jfugue.pattern.Token;
-
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Tokenizer {
     private static String program;

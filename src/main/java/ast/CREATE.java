@@ -1,5 +1,7 @@
 package ast;
 
+import exceptions.DuplicateNameException;
+
 public class CREATE extends INSTRUCTION {
     NAME name = new NAME();
     SOUND sound = new SOUND();
