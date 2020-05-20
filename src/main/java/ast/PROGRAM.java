@@ -32,7 +32,6 @@ public class PROGRAM extends Node {
         for (INSTRUCTION eachInstruction: instructions) {
             eachInstruction.evaluate();
         }
-
         play.evaluate();
     }
 }

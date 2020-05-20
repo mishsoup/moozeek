@@ -7,6 +7,7 @@ import exceptions.DuplicateNameException;
 import exceptions.WrongNameException;
 import org.jfugue.pattern.Pattern;
 import org.jfugue.pattern.PatternProducer;
+import org.jfugue.player.Player;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,11 @@ import java.util.Map;
 
 public class MusicCreator {
     private Map<String, PatternProducer> songs = new HashMap<String, PatternProducer>();
+    private Player player = new Player();
+
+    public Player getPlayer (){
+        return player;
+    }
 
     public void addMusic(String name, PatternProducer pattern) throws DuplicateNameException {
         if (songs.containsKey(name)) throw new DuplicateNameException("The name used to search Sound in songs is duplicated.");
