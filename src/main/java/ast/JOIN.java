@@ -1,11 +1,12 @@
 package ast;
 
+import org.jfugue.pattern.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JOIN extends INSTRUCTION {
     List<NAME> subNames = new ArrayList<>();
-    NAME majorName = new NAME();
+    NAME joinedName = new NAME();
 
     @Override
     public void parse() {
@@ -24,11 +25,15 @@ public class JOIN extends INSTRUCTION {
             subNames.add(subName);
         }
         tokenizer.getAndCheckNext("INTO");
-        majorName.parse();
+        joinedName.parse();
     }
 
     @Override
     public void evaluate() {
-
+        Pattern newSound = new Pattern();
+        for (NAME subName: subNames) {
+            newSound.add(musicCreator.getSound(subName.name));
+        }
+        musicCreator.addMusic(joinedName.name, newSound);
     }
 }

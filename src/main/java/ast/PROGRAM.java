@@ -3,11 +3,13 @@ package ast;
 import libs.Node;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class PROGRAM extends Node {
     List<INSTRUCTION> instructions = new ArrayList<>();
     PLAY play = new PLAY();
+    HashMap<String, String> songs = new HashMap<>();
 
     @Override
     public void parse() {
@@ -27,5 +29,9 @@ public class PROGRAM extends Node {
 
     @Override
     public void evaluate() {
+        for (INSTRUCTION eachInstruction: instructions) {
+            eachInstruction.evaluate();
+        }
+        play.evaluate();
     }
 }

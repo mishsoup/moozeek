@@ -1,9 +1,10 @@
 package ast;
 
 public class REST extends BASEKEY {
-    LENGTH length = new LENGTH();
     @Override
     public void parse() {
+        length = new LENGTH();
+        theNote = "R";
         tokenizer.getAndCheckNext("REST");
         length.parse();
     }

@@ -1,17 +1,15 @@
 package ast;
 
 public class NOTE extends BASEKEY {
-    String note;
-    LENGTH length = new LENGTH();
     @Override
     public void parse() {
-        note = tokenizer.getNext();
+        length = new LENGTH();
+        theNote = tokenizer.getNext();
         tokenizer.getAndCheckNext(",");
         length.parse();
     }
 
     @Override
     public void evaluate() {
-
     }
 }

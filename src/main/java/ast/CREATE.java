@@ -1,5 +1,7 @@
 package ast;
 
+import exceptions.DuplicateNameException;
+
 public class CREATE extends INSTRUCTION {
     NAME name = new NAME();
     SOUND sound = new SOUND();
@@ -14,6 +16,7 @@ public class CREATE extends INSTRUCTION {
 
     @Override
     public void evaluate() {
-
+        String songName = name.name;
+        musicCreator.addMusic(songName,musicCreator.createMusic(sound));
     }
 }
