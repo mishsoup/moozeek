@@ -6,5 +6,5 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BASESOUND extends Node {
-    public List<BASEKEY> chords = new ArrayList<>();
+    public List<BASEKEY> notes = new ArrayList<>();
 }
