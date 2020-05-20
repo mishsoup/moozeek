@@ -28,9 +28,13 @@ public class MusicCreator {
 
         List<BASEKEY> baseSound = sound.getBaseSound().chords;
         for (BASEKEY eachKey: baseSound) {
-
+            // need to call evaluate to parse the string theNote into corresponding one in the API
+            eachKey.evaluate();
+            musicString.append(" " + eachKey.theNote + eachKey.length.getLength() + " ");
         }
-        return null;
+
+        Pattern newPattern = new Pattern(musicString.toString());
+        return newPattern;
     }
 
 }
