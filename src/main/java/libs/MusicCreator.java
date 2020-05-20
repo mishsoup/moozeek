@@ -26,7 +26,7 @@ public class MusicCreator {
         //append the instrument first
         musicString.append("V0 I["+ instrument +"]");
 
-        List<BASEKEY> baseSound = sound.getBaseSound().chords;
+        List<BASEKEY> baseSound = sound.getBaseSound().notes;
         for (BASEKEY eachKey: baseSound) {
             // need to call evaluate to parse the string theNote into corresponding one in the API
             eachKey.evaluate();

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MELODY extends BASESOUND {
-    List<BASEKEY> notes = new ArrayList<>();
-
     @Override
     public void parse() {
         tokenizer.getAndCheckNext("MELODY:");
