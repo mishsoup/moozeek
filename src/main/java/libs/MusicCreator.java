@@ -3,6 +3,8 @@ package libs;
 import ast.BASEKEY;
 import ast.BASESOUND;
 import ast.SOUND;
+import exceptions.DuplicateNameException;
+import exceptions.WrongNameException;
 import org.jfugue.pattern.Pattern;
 import org.jfugue.pattern.PatternProducer;
 
@@ -13,8 +15,14 @@ import java.util.Map;
 public class MusicCreator {
     private Map<String, PatternProducer> songs = new HashMap<String, PatternProducer>();
 
-    public void addMusic(String name, PatternProducer pattern) {
+    public void addMusic(String name, PatternProducer pattern) throws DuplicateNameException {
+        if (songs.containsKey(name)) throw new DuplicateNameException("The name used to search Sound in songs is duplicated.");
         songs.put(name, pattern);
+    }
+
+    public PatternProducer getSound(String name) throws WrongNameException {
+        if (!songs.containsKey(name)) throw new WrongNameException("Can not find the Sound name in songs.");
+        return songs.get(name);
     }
 
     public Pattern createMusic(SOUND sound) {
@@ -36,5 +44,4 @@ public class MusicCreator {
         Pattern newPattern = new Pattern(musicString.toString());
         return newPattern;
     }
-
 }
