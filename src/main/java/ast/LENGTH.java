@@ -9,6 +9,10 @@ public class LENGTH extends Node {
         length = tokenizer.getNext();
     }
 
+    public String getLength() {
+        return length;
+    }
+
     @Override
     public void evaluate() {
 

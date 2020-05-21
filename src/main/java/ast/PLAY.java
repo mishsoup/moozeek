@@ -1,6 +1,8 @@
 package ast;
 
+import exceptions.WrongNameException;
 import libs.Node;
+import org.jfugue.pattern.PatternProducer;
 
 public class PLAY extends Node {
     NAME name = new NAME();
@@ -13,6 +15,11 @@ public class PLAY extends Node {
 
     @Override
     public void evaluate() {
-
+        try {
+            PatternProducer music = musicCreator.getSound(name.name);
+            musicCreator.getPlayer().play(music);
+        } catch (WrongNameException e) {
+            e.printStackTrace();
+        }
     }
 }

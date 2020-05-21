@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CHORDPROGRESSION extends BASESOUND {
-    List<BASEKEY> chords = new ArrayList<>();
     @Override
     public void parse() {
         tokenizer.getAndCheckNext("CHORD:");
@@ -16,7 +15,7 @@ public class CHORDPROGRESSION extends BASESOUND {
                 key = new CHORD();
             }
             key.parse();
-            chords.add(key);
+            notes.add(key);
         }
     }
 
