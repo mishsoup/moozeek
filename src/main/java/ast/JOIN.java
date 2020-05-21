@@ -1,6 +1,7 @@
 package ast;
 
-import org.jfugue.pattern.Pattern;
+import visitors.Visitor;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,11 +30,10 @@ public class JOIN extends INSTRUCTION {
     }
 
     @Override
-    public void evaluate() {
-        Pattern newSound = new Pattern();
-        for (NAME subName: subNames) {
-            newSound.add(musicCreator.getSound(subName.name));
-        }
-        musicCreator.addMusic(joinedName.name, newSound);
+    public String accept(Visitor visitor) {
+        visitor.evaluate(this);
+        return null;
     }
+
+
 }

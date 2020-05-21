@@ -1,5 +1,7 @@
 package ast;
 
+import visitors.Visitor;
+
 public class NOTE extends BASEKEY {
     @Override
     public void parse() {
@@ -10,6 +12,9 @@ public class NOTE extends BASEKEY {
     }
 
     @Override
-    public void evaluate() {
+    public String accept(Visitor visitor) {
+        return visitor.evaluate(this);
     }
+
+
 }

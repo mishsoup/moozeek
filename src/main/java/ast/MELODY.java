@@ -1,7 +1,6 @@
 package ast;
 
-import java.util.ArrayList;
-import java.util.List;
+import visitors.Visitor;
 
 public class MELODY extends BASESOUND {
     @Override
@@ -20,7 +19,8 @@ public class MELODY extends BASESOUND {
     }
 
     @Override
-    public void evaluate() {
-
+    public String accept(Visitor visitor) {
+        return visitor.evaluate(this);
     }
+
 }

@@ -1,6 +1,7 @@
 package ast;
 
 import libs.Node;
+import visitors.Visitor;
 
 public class BEAT extends Node {
     public COUNTS counts = new COUNTS();
@@ -16,7 +17,10 @@ public class BEAT extends Node {
     }
 
     @Override
-    public void evaluate() {
-
+    public String accept(Visitor visitor) {
+        visitor.evaluate(this);
+        return null;
     }
+
+
 }

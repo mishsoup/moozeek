@@ -1,16 +1,20 @@
 package ast;
 
 import libs.Node;
+import visitors.Visitor;
 
 public class NAME extends Node {
-    String name;
+    public String name;
     @Override
     public void parse() {
         name = tokenizer.getNext();
     }
 
     @Override
-    public void evaluate() {
-
+    public String accept(Visitor visitor) {
+        visitor.evaluate(this);
+        return null;
     }
+
+
 }

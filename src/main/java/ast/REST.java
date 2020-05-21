@@ -1,5 +1,7 @@
 package ast;
 
+import visitors.Visitor;
+
 public class REST extends BASEKEY {
     @Override
     public void parse() {
@@ -10,7 +12,10 @@ public class REST extends BASEKEY {
     }
 
     @Override
-    public void evaluate() {
-
+    public String accept(Visitor visitor) {
+        visitor.evaluate(this);
+        return null;
     }
+
+
 }

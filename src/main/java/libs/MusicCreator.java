@@ -17,8 +17,13 @@ public class MusicCreator {
 
     private static MusicCreator theMusicCreator;
     private Map<String, Pattern> songs = new HashMap<String, Pattern>();
+    private Player player = new Player();
 
-    public void addMusic(String name, Pattern pattern) {
+    public Player getPlayer (){
+        return player;
+    }
+
+    public void addMusicToSongs(String name, Pattern pattern) {
         songs.put(name, pattern);
     }
 
@@ -31,23 +36,8 @@ public class MusicCreator {
         return songs.size();
     }
 
-    public Pattern createMusic(SOUND sound) {
-        StringBuilder musicString = new StringBuilder();
-
-        //TODO have to figure out how beat works add add it here
-
-        String instrument = sound.getInstrument().instrument;
-        //append the instrument first
-        musicString.append("V0 I["+ instrument +"]");
-
-        List<BASEKEY> baseSound = sound.getBaseSound().notes;
-        for (BASEKEY eachKey: baseSound) {
-            // need to call evaluate to parse the string theNote into corresponding one in the API
-            eachKey.evaluate();
-            musicString.append(" " + eachKey.theNote + eachKey.length.getLength() + " ");
-        }
-
-        Pattern newPattern = new Pattern(musicString.toString());
+    public Pattern createMusicPattern(String songString) {
+        Pattern newPattern = new Pattern(songString.toString());
         return newPattern;
     }
 

@@ -1,6 +1,7 @@
 package ast;
 
 import libs.Node;
+import visitors.Visitor;
 
 public class COUNTVALUE extends Node {
     String value;
@@ -13,7 +14,9 @@ public class COUNTVALUE extends Node {
     }
 
     @Override
-    public void evaluate() {
-
+    public String accept(Visitor visitor) {
+        visitor.evaluate(this);
+        return null;
     }
+
 }
