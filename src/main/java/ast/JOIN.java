@@ -9,6 +9,14 @@ public class JOIN extends INSTRUCTION {
     List<NAME> subNames = new ArrayList<>();
     NAME joinedName = new NAME();
 
+    public NAME getJoinedName() {
+        return joinedName;
+    }
+
+    public List<NAME> getSubNames() {
+        return subNames;
+    }
+
     @Override
     public void parse() {
         tokenizer.getAndCheckNext("JOIN");

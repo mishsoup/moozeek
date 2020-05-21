@@ -24,21 +24,6 @@ public class PlayerVisitor implements Visitor{
 
     @Override
     public String evaluate(CHORD chord) {
-        if (chord.theNote.matches("[A-G][m][1-9]")) {
-            String firstHalf  = chord.theNote.substring(0,1);
-            String secondHalf = theNote.substring(2);
-            theNote = firstHalf + "min" + secondHalf;
-        } else if (theNote.matches("[A-G][m]")) {
-            String firstHalf  = theNote.substring(0,1);
-            theNote = firstHalf+"min";
-        } else if (theNote.matches("[A-G][1-9]")) {
-            String firstHalf  = theNote.substring(0,1);
-            String secondHalf = theNote.substring(1);
-            theNote = firstHalf + "maj" + secondHalf;
-        } else if (theNote.matches("[A-G]")) {
-            String firstHalf  = theNote.substring(0,1);
-            theNote = firstHalf+"maj";
-        }
         return null;
     }
 
@@ -73,10 +58,10 @@ public class PlayerVisitor implements Visitor{
     @Override
     public String evaluate(JOIN join) {
         Pattern newSound = new Pattern();
-        for (NAME subName: subNames) {
+        for (NAME subName: join.getSubNames()) {
             newSound.add(musicCreator.getSound(subName.name));
         }
-        musicCreator.addMusic(joinedName.name, newSound);
+        musicCreator.addMusicToSongs(join.getJoinedName().name, newSound);
         return null;
     }
 
