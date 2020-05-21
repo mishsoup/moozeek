@@ -6,6 +6,8 @@ import libs.MusicCreator;
 import org.jfugue.pattern.Pattern;
 import org.jfugue.pattern.PatternProducer;
 
+import java.util.List;
+
 public class PlayerVisitor implements Visitor<String>{
     static protected MusicCreator musicCreator = MusicCreator.getMusicCreator();
 
@@ -63,17 +65,43 @@ public class PlayerVisitor implements Visitor<String>{
     @Override
     public String evaluate(JOIN join) {
         //TODO this may not work, need to experiment with the API a bit first lol >:D
-        Pattern newSound = new Pattern();
-        for (NAME subName: join.getSubNames()) {
-            newSound.prepend(musicCreator.getSound(subName.name));
+        List<NAME> names = join.getSubNames();
+        int nameListSize = names.size();
+        // song is last song using the tail position song name
+        Pattern song = musicCreator.getSound(names.get(nameListSize - 1).name);
+        for (int i = nameListSize - 2; 0 <=  i ; i--) {
+            //prepend the previous song, since API only offers prepend we have to do it this way
+            song = song.prepend(musicCreator.getSound(names.get(i).name));
         }
-        musicCreator.addMusicToSongs(join.getJoinedName().name, newSound);
+        musicCreator.addMusicToSongs(join.getJoinedName().name, song);
         return null;
     }
 
     @Override
     public String evaluate(LENGTH length) {
-        return null;
+        String len;
+        switch(length.getLength())
+        {
+            case "sixteenth":
+                len = "s";
+                break;
+            case "eighth":
+                len = "i";
+                break;
+            case "quarter":
+                len = "q";
+                break;
+            case "half":
+                len = "h";
+                break;
+            case "whole":
+                len = "w";
+                break;
+            default:
+                len = "";
+                System.out.println("Length has no match");
+        }
+        return len;
     }
 
     @Override

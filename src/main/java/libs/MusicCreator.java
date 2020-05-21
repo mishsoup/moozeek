@@ -27,7 +27,7 @@ public class MusicCreator {
         songs.put(name, pattern);
     }
 
-    public PatternProducer getSound(String name) {
+    public Pattern getSound(String name) {
         return songs.get(name);
     }
 
@@ -36,6 +36,7 @@ public class MusicCreator {
         return songs.size();
     }
 
+    // TODO wanted to use this but seems redundant, may need to delete later if never gets called
     public Pattern createMusicPattern(String songString) {
         Pattern newPattern = new Pattern(songString.toString());
         return newPattern;
