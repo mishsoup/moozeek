@@ -12,7 +12,7 @@ public class NOTE extends BASEKEY {
     }
 
     @Override
-    public String accept(Visitor visitor) {
+    public <T> T accept(Visitor<T> visitor) {
         return visitor.evaluate(this);
     }
 

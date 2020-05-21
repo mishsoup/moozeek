@@ -11,9 +11,8 @@ public class NAME extends Node {
     }
 
     @Override
-    public String accept(Visitor visitor) {
-        visitor.evaluate(this);
-        return null;
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.evaluate(this);
     }
 
 

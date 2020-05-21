@@ -19,7 +19,7 @@ public class MELODY extends BASESOUND {
     }
 
     @Override
-    public String accept(Visitor visitor) {
+    public <T> T accept(Visitor<T> visitor) {
         return visitor.evaluate(this);
     }
 

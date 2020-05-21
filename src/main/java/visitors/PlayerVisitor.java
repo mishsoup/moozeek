@@ -6,7 +6,7 @@ import libs.MusicCreator;
 import org.jfugue.pattern.Pattern;
 import org.jfugue.pattern.PatternProducer;
 
-public class PlayerVisitor implements Visitor{
+public class PlayerVisitor implements Visitor<String>{
     static protected MusicCreator musicCreator = MusicCreator.getMusicCreator();
 
     @Override
@@ -107,7 +107,7 @@ public class PlayerVisitor implements Visitor{
     public String evaluate(SOUND sound) {
         StringBuilder musicString = new StringBuilder("V0 I["+sound.getInstrument()+"]");
         // TODO NEED TO ADD IN BEAT AND BPM HERE
-        String baseSounds = sound.getBaseSound().accept(this);
+        String baseSounds = (String) sound.getBaseSound().accept(this);
         musicString.append(baseSounds);
         return musicString.toString();
     }
