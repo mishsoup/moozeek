@@ -10,6 +10,7 @@ import java.util.List;
 
 public class PlayerVisitor implements Visitor<String>{
     static protected MusicCreator musicCreator = MusicCreator.getMusicCreator();
+    private String defaultBPM;
 
     @Override
     public String evaluate(PLAY play) {
@@ -64,12 +65,10 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(JOIN join) {
-        //TODO this may not work, need to experiment with the API a bit first lol >:D
         List<NAME> names = join.getSubNames();
         int nameListSize = names.size();
-        // song is last song using the tail position song name
-        Pattern song = musicCreator.getSound(names.get(nameListSize - 1).name);
-        for (int i = nameListSize - 2; 0 <=  i ; i--) {
+        Pattern song = new Pattern();
+        for (int i = nameListSize - 1; 0 <=  i ; i--) {
             //prepend the previous song, since API only offers prepend we have to do it this way
             song = song.prepend(musicCreator.getSound(names.get(i).name));
         }
@@ -146,7 +145,7 @@ public class PlayerVisitor implements Visitor<String>{
         Pattern musicPattern = new Pattern("TIME:" + beat.counts.num + "/" + beat.countvalue);
         musicPattern.add(sound.getBaseSound().accept(this));
         musicPattern.setInstrument(sound.getInstrument().instrument);
-        // TODO need to add BPM to the music pattern if it exist else use default
+        // TODO need to add BPM to the music pattern if it exist else use defaultBPM
         // TODO wait until the parser finishes and BPM class is added
         return musicPattern.toString();
     }
