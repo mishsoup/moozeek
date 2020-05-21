@@ -4,13 +4,13 @@ import org.jfugue.pattern.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JOIN extends INSTRUCTION {
+public class CONNECT extends INSTRUCTION {
     List<NAME> subNames = new ArrayList<>();
     NAME joinedName = new NAME();
 
     @Override
     public void parse() {
-        tokenizer.getAndCheckNext("JOIN");
+        tokenizer.getAndCheckNext("CONNECT");
         NAME subName1 = new NAME();
         subName1.parse();
         subNames.add(subName1);
