@@ -7,8 +7,7 @@ public class Tokenizer {
     private static String program;
     private static Tokenizer globalTokenizer;
     private static List<String> keyWords = Arrays.asList("START", ",", "{", "}", "PLAY", "CONNECT", "INTO", "LAYER",
-            "CREATE", "Guitar", "Piano", "R", "Chord:", "-", "+", "BPM", "sixteenth", "eighth", "quarter", "half",
-            "whole", "/");
+            "CREATE", "Guitar", "Piano", "R", "Chord:", "BPM", "/");
     private int currentTokenIndex = 0;
     private String[] tokens;
 

@@ -4,3 +4,10 @@ CREATE Music Guitar, [Guitar, 4/4, Melody: C4q, D4q, E4q, F4q]
 CREATE Music Piano, [Piano, 4/4, Melody: C4q, D4q, E4q, F4q]
 CONNECT Music Guitar, Music Piano INTO MusicGuitarAndPiano
 PLAY MusicGuitarAndPiano
+
+START
+BPM: 100,
+CREATE Music Guitar, [Guitar, 4/4, Melody: C4q, D4q, E4q, F4q]
+CREATE Music Piano, [Piano, 4/4, Melody: C4q, D4q, E4q, F4q]
+CONNECT Music Guitar, Music Piano INTO MusicGuitarAndPiano
+PLAY MusicGuitarAndPiano
