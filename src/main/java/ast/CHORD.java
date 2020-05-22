@@ -5,10 +5,11 @@ import visitors.Visitor;
 public class CHORD extends BASEKEY {
     @Override
     public void parse() {
-        length = new LENGTH();
         theNote = tokenizer.getNext();
-        tokenizer.getAndCheckNext(",");
-        length.parse();
+        if (tokenizer.checkToken("-") || tokenizer.checkToken("+")) {
+            octave = new OCTAVE();
+            octave.parse();
+        }
     }
 
     @Override

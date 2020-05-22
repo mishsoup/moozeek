@@ -1,7 +1,5 @@
 package ast;
 
-import visitors.Visitor;
-
 public class CREATE extends INSTRUCTION {
     public NAME name = new NAME();
     public SOUND sound = new SOUND();
