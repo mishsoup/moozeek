@@ -39,7 +39,7 @@ public class CONNECT extends INSTRUCTION {
         newName.parse();
     }
 
-
+    @Override
     public <T> T accept(Visitor<T> visitor) {
         return visitor.evaluate(this);
     }

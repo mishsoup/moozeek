@@ -19,5 +19,7 @@ public interface Visitor<T> {
     T evaluate(PROGRAM program);
     T evaluate(REST rest);
     T evaluate(SOUND sound);
-    T evaluate(TITLE title);
+    T evaluate(LAYER layer);
+    T evaluate(BPM bpm);
+    T evaluate(COMMENT comment);
 }

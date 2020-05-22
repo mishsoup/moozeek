@@ -1,5 +1,7 @@
 package ast;
 
+import visitors.Visitor;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +30,17 @@ public class LAYER extends INSTRUCTION {
         newName.parse();
     }
 
-    @Override
-    public void evaluate() {
-
+    public List<NAME> getSubNames() {
+        return subNames;
     }
+
+    public NAME getNewName() {
+        return newName;
+    }
+
+    @Override
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.evaluate(this);
+    }
+
 }

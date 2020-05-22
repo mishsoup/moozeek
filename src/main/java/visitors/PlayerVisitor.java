@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PlayerVisitor implements Visitor<String>{
     static protected MusicCreator musicCreator = MusicCreator.getMusicCreator();
-    private String defaultBPM;
+    private int defaultBPM;
 
     @Override
     public String evaluate(PLAY play) {
@@ -26,8 +26,13 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(CHORD chord) {
-        //TODO need to evaluate chord
-        return null;
+        String octaveString = getOctave(chord.octave);
+        String note = chord.theNote.substring(0,1);
+        String tone = "maj";
+        if (chord.theNote.substring(1).equals("m")){
+            tone = "min";
+        }
+        return note+tone+octaveString+chord.lengths;
     }
 
     @Override
@@ -36,6 +41,8 @@ public class PlayerVisitor implements Visitor<String>{
         for (BASEKEY eachKey: chordprogression.notes) {
             musicString.append(" " + eachKey.accept(this) + " ");
         }
+        // TODO maybe we can take this line out and just directly return the string
+        // TODO to be considered later
         Pattern musicPattern = new Pattern(musicString.toString());
         return musicPattern.toString();
     }
@@ -68,9 +75,8 @@ public class PlayerVisitor implements Visitor<String>{
         List<NAME> names = connect.getSubNames();
         int nameListSize = names.size();
         Pattern song = new Pattern();
-        for (int i = nameListSize - 1; 0 <=  i ; i--) {
-            //prepend the previous song, since API only offers prepend we have to do it this way
-            song = song.prepend(musicCreator.getSound(names.get(i).name));
+        for (int i = 0; i < nameListSize ; i++) {
+            song.add(musicCreator.getSound(names.get(i).name));
         }
         musicCreator.addMusicToSongs(connect.getNewName().name, song);
         return null;
@@ -78,29 +84,7 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(LENGTH length) {
-        String len;
-        switch(length.getLength())
-        {
-            case "sixteenth":
-                len = "s";
-                break;
-            case "eighth":
-                len = "i";
-                break;
-            case "quarter":
-                len = "q";
-                break;
-            case "half":
-                len = "h";
-                break;
-            case "whole":
-                len = "w";
-                break;
-            default:
-                len = "";
-                System.out.println("Length has no match");
-        }
-        return len;
+        return null;
     }
 
     @Override
@@ -109,6 +93,8 @@ public class PlayerVisitor implements Visitor<String>{
         for (BASEKEY eachKey: melody.notes) {
             musicString.append(" " + eachKey.accept(this) + " ");
         }
+        // TODO maybe we can take this line out and just directly return the string
+        // TODO to be considered later
         Pattern musicPattern = new Pattern(musicString.toString());
         return musicPattern.toString();
     }
@@ -120,38 +106,77 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(NOTE note) {
-        //TODO need to evaluate note
-        return null;
+        String octaveString = getOctave(note.octave);
+        return note.theNote+octaveString+note.lengths;
     }
 
     @Override
     public String evaluate(PROGRAM program) {
+        defaultBPM = Integer.parseInt(program.bpm.bpm);
         for (INSTRUCTION eachInstruction: program.instructions) {
             eachInstruction.accept(this);
         }
-        program.play.accept(this);
+        if (program.play != null) {
+            program.play.accept(this);
+        }
         return null;
     }
 
     @Override
     public String evaluate(REST rest) {
-        //TODO need to evaluate rest
-        return null;
+        return "R"+rest.lengths;
     }
 
     @Override
     public String evaluate(SOUND sound) {
         BEAT beat = sound.getBeat();
-        Pattern musicPattern = new Pattern("TIME:" + beat.counts.num + "/" + beat.countvalue);
+        Pattern musicPattern = new Pattern("TIME:" + beat.counts.num + "/" + beat.countvalue.countValue);
         musicPattern.add(sound.getBaseSound().accept(this));
         musicPattern.setInstrument(sound.getInstrument().instrument);
-        // TODO need to add BPM to the music pattern if it exist else use defaultBPM
-        // TODO wait until the parser finishes and BPM class is added
+        if (sound.bpm != null) {
+            musicPattern.setTempo(Integer.parseInt(sound.bpm.bpm));
+        } else {
+            musicPattern.setTempo(defaultBPM);
+        }
         return musicPattern.toString();
     }
 
     @Override
-    public String evaluate(TITLE title) {
+    public String evaluate(LAYER layer) {
+        List<NAME> names = layer.getSubNames();
+        int nameListSize = names.size();
+        Pattern song = new Pattern();
+        for (int i = 0; i < nameListSize ; i++) {
+            song.add(musicCreator.getSound(names.get(i).name).setVoice(i));
+        }
+        musicCreator.addMusicToSongs(layer.getNewName().name, song);
         return null;
+    }
+
+    @Override
+    public String evaluate(BPM bpm) {
+        return null;
+    }
+
+    @Override
+    public String evaluate(COMMENT comment) {
+        return null;
+    }
+
+    private String getOctave(String octaveString){
+        String sign = octaveString.substring(0,1);
+        int octave;
+        if (sign.equals("+")) {
+            octave = 5 + Integer.valueOf(octaveString.substring(1));
+            if (octave > 10) {
+                octave = 10;
+            }
+        } else {
+            octave = 5 - Integer.valueOf(octaveString.substring(1));
+            if (octave < 0) {
+                octave = 0;
+            }
+        }
+        return Integer.toString(octave);
     }
 }
