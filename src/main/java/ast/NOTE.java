@@ -1,5 +1,7 @@
 package ast;
 
+import visitors.Visitor;
+
 public class NOTE extends BASEKEY {
 
     @Override
@@ -29,6 +31,9 @@ public class NOTE extends BASEKEY {
     }
 
     @Override
-    public void evaluate() {
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.evaluate(this);
     }
+
+
 }

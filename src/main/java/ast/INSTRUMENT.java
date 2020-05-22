@@ -1,6 +1,7 @@
 package ast;
 
 import libs.Node;
+import visitors.Visitor;
 
 public class INSTRUMENT extends Node {
     public String instrument;
@@ -11,7 +12,8 @@ public class INSTRUMENT extends Node {
     }
 
     @Override
-    public void evaluate() {
-
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.evaluate(this);
     }
+
 }

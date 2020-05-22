@@ -1,18 +1,18 @@
 package ast;
 
+import libs.Node;
 import visitors.Visitor;
 
-public class REST extends BASEKEY {
+public class TITLE extends Node {
     @Override
     public void parse() {
-        tokenizer.getAndCheckNext("R");
-        theNote = "R";
-        lengths = tokenizer.getNext();
+
     }
 
     @Override
     public <T> T accept(Visitor<T> visitor) {
         return visitor.evaluate(this);
     }
+
 
 }

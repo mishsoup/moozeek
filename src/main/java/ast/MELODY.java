@@ -1,5 +1,7 @@
 package ast;
 
+import visitors.Visitor;
+
 public class MELODY extends BASESOUND {
     @Override
     public void parse() {
@@ -28,7 +30,8 @@ public class MELODY extends BASESOUND {
     }
 
     @Override
-    public void evaluate() {
-
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.evaluate(this);
     }
+
 }

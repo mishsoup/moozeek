@@ -1,18 +1,22 @@
 package ast;
 
 import libs.Node;
+import visitors.Visitor;
 
 public class COUNTS extends Node {
-    public String counts;
-    // COUNTS ::= [1-8]
+
+    public String num;
+    // values we use for evaluate, can change to re later
+    String[] values = new String[] {"1", "2", "3", "4", "5", "6", "7", "8"};
 
     @Override
     public void parse() {
-        counts = tokenizer.getNext();
+        num = tokenizer.getNext();
     }
 
     @Override
-    public void evaluate() {
-
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.evaluate(this);
     }
+
 }

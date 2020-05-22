@@ -1,14 +1,23 @@
 package ast;
 
 import org.jfugue.pattern.Pattern;
+import visitors.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CONNECT extends INSTRUCTION {
     private String beginKey = "CONNECT";
-    public List<NAME> subNames = new ArrayList<>();
-    public NAME newName = new NAME();
+    List<NAME> subNames = new ArrayList<>();
+    NAME newName = new NAME();
+
+    public NAME getNewName() {
+        return newName;
+    }
+
+    public List<NAME> getSubNames() {
+        return subNames;
+    }
 
     @Override
     public void parse() {
@@ -30,12 +39,10 @@ public class CONNECT extends INSTRUCTION {
         newName.parse();
     }
 
-    @Override
-    public void evaluate() {
-        Pattern newSound = new Pattern();
-        for (NAME subName: subNames) {
-            newSound.add(musicCreator.getSound(subName.name));
-        }
-        musicCreator.addMusic(newName.name, newSound);
+
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.evaluate(this);
     }
+
+
 }

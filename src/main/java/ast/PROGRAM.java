@@ -1,14 +1,15 @@
 package ast;
 
 import libs.Node;
+import visitors.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PROGRAM extends Node {
+
     public BPM bpm = new BPM();
     public List<INSTRUCTION> instructions = new ArrayList<>();
-    // play optional
     public PLAY play = null;
 
     @Override
@@ -40,10 +41,9 @@ public class PROGRAM extends Node {
     }
 
     @Override
-    public void evaluate() {
-        for (INSTRUCTION eachInstruction: instructions) {
-            eachInstruction.evaluate();
-        }
-        play.evaluate();
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.evaluate(this);
     }
+
+
 }

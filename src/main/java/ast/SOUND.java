@@ -1,12 +1,14 @@
 package ast;
 
 import libs.Node;
+import visitors.Visitor;
 
 public class SOUND extends Node {
     public INSTRUMENT instrument = new INSTRUMENT();
     public BEAT beat = new BEAT();
     public BASESOUND baseSound;
     public BPM bpm = null;
+
 
     @Override
     public void parse() {
@@ -30,6 +32,11 @@ public class SOUND extends Node {
         tokenizer.getAndCheckNext("]");
     }
 
+    @Override
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.evaluate(this);
+    }
+
     public INSTRUMENT getInstrument() {
         return instrument;
     }
@@ -42,8 +49,5 @@ public class SOUND extends Node {
         return baseSound;
     }
 
-    @Override
-    public void evaluate() {
 
-    }
 }

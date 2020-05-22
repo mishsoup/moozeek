@@ -1,5 +1,7 @@
 package ast;
 
+import visitors.Visitor;
+
 public class CREATE extends INSTRUCTION {
     public NAME name = new NAME();
     public SOUND sound = new SOUND();
@@ -13,8 +15,9 @@ public class CREATE extends INSTRUCTION {
     }
 
     @Override
-    public void evaluate() {
-        String songName = name.name;
-        musicCreator.addMusic(songName,musicCreator.createMusic(sound));
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.evaluate(this);
     }
+
+
 }
