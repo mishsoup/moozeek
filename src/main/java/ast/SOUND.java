@@ -7,7 +7,8 @@ public class SOUND extends Node {
     public INSTRUMENT instrument = new INSTRUMENT();
     public BEAT beat = new BEAT();
     public BASESOUND baseSound;
-    public BPM bpm;
+    public BPM bpm = null;
+
 
     @Override
     public void parse() {
@@ -26,6 +27,7 @@ public class SOUND extends Node {
         } else if (tokenizer.checkToken("CHORD:")) {
             baseSound = new CHORDPROGRESSION();
         }
+        // TODO else exception
         baseSound.parse();
         tokenizer.getAndCheckNext("]");
     }

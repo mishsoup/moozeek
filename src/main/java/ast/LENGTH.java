@@ -4,7 +4,7 @@ import libs.Node;
 import visitors.Visitor;
 
 public class LENGTH extends Node {
-    // LENGTH ::= sixteenth | eighth | quarter | half | whole
+    // LENGTH ::= s i q h w
     String length;
     @Override
     public void parse() {

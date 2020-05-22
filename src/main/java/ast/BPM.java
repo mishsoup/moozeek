@@ -4,14 +4,14 @@ import libs.Node;
 import visitors.Visitor;
 
 public class BPM extends Node {
-    public String num;
+    public String bpm;
     // validate pattern 1 - 200
     String pattern = "^([1-9]|[1-9][0-9]|[1][0-9][0-9]|20[0-0])$";
 
     @Override
     public void parse() {
         tokenizer.getAndCheckNext("BPM:");
-        num = tokenizer.getNext();
+        bpm = tokenizer.getNext();
     }
 
     @Override

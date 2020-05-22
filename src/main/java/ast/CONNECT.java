@@ -8,8 +8,8 @@ import java.util.List;
 
 public class CONNECT extends INSTRUCTION {
     private String beginKey = "CONNECT";
-    public List<NAME> subNames = new ArrayList<>();
-    public NAME newName = new NAME();
+    List<NAME> subNames = new ArrayList<>();
+    NAME newName = new NAME();
 
     public NAME getNewName() {
         return newName;
@@ -29,7 +29,7 @@ public class CONNECT extends INSTRUCTION {
         NAME subName2 = new NAME();
         subName2.parse();
         subNames.add(subName2);
-        while(!tokenizer.checkToken("INTO")) {
+        while(tokenizer.checkToken(",") && !tokenizer.checkToken("INTO")) {
             tokenizer.getAndCheckNext(",");
             NAME subName = new NAME();
             subName.parse();

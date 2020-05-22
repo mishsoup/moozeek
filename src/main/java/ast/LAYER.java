@@ -20,7 +20,7 @@ public class LAYER extends INSTRUCTION {
         NAME subName2 = new NAME();
         subName2.parse();
         subNames.add(subName2);
-        while(!tokenizer.checkToken("INTO")) {
+        while(tokenizer.checkToken(",") && !tokenizer.checkToken("INTO")) {
             tokenizer.getAndCheckNext(",");
             NAME subName = new NAME();
             subName.parse();

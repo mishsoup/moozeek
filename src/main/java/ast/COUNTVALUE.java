@@ -4,12 +4,12 @@ import libs.Node;
 import visitors.Visitor;
 
 public class COUNTVALUE extends Node {
-    public String value;
+    public String countValue;
     // COUNTVALUE ::= 16 | 8| 4| 2
 
     @Override
     public void parse() {
-        value = tokenizer.getNext();
+        countValue = tokenizer.getNext();
     }
 
     @Override
