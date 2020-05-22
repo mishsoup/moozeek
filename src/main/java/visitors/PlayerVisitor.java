@@ -26,8 +26,13 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(CHORD chord) {
-        //TODO need to evaluate chord
-        return null;
+        String octaveString = getOctave(chord.octave);
+        String note = chord.theNote.substring(0,1);
+        String tone = "maj";
+        if (chord.theNote.substring(1).equals("m")){
+            tone = "min";
+        }
+        return note+tone+octaveString+chord.lengths;
     }
 
     @Override
@@ -79,29 +84,7 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(LENGTH length) {
-        String len;
-        switch(length.getLength())
-        {
-            case "sixteenth":
-                len = "s";
-                break;
-            case "eighth":
-                len = "i";
-                break;
-            case "quarter":
-                len = "q";
-                break;
-            case "half":
-                len = "h";
-                break;
-            case "whole":
-                len = "w";
-                break;
-            default:
-                len = "";
-                System.out.println("Length has no match");
-        }
-        return len;
+        return null;
     }
 
     @Override
@@ -123,13 +106,13 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(NOTE note) {
-        //TODO need to evaluate note
-        return null;
+        String octaveString = getOctave(note.octave);
+        return note.theNote+octaveString+note.lengths;
     }
 
     @Override
     public String evaluate(PROGRAM program) {
-        defaultBPM = Integer.parseInt(program.bpm.num);
+        defaultBPM = Integer.parseInt(program.bpm.bpm);
         for (INSTRUCTION eachInstruction: program.instructions) {
             eachInstruction.accept(this);
         }
@@ -141,18 +124,17 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(REST rest) {
-        //TODO need to evaluate rest
-        return null;
+        return "R"+rest.lengths;
     }
 
     @Override
     public String evaluate(SOUND sound) {
         BEAT beat = sound.getBeat();
-        Pattern musicPattern = new Pattern("TIME:" + beat.counts.num + "/" + beat.countvalue.value);
+        Pattern musicPattern = new Pattern("TIME:" + beat.counts.num + "/" + beat.countvalue.countValue);
         musicPattern.add(sound.getBaseSound().accept(this));
         musicPattern.setInstrument(sound.getInstrument().instrument);
         if (sound.bpm != null) {
-            musicPattern.setTempo(Integer.parseInt(sound.bpm.num));
+            musicPattern.setTempo(Integer.parseInt(sound.bpm.bpm));
         } else {
             musicPattern.setTempo(defaultBPM);
         }
@@ -161,7 +143,13 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(LAYER layer) {
-        // TODO
+        List<NAME> names = layer.getSubNames();
+        int nameListSize = names.size();
+        Pattern song = new Pattern();
+        for (int i = 0; i < nameListSize ; i++) {
+            song.add(musicCreator.getSound(names.get(i).name).setVoice(i));
+        }
+        musicCreator.addMusicToSongs(layer.getNewName().name, song);
         return null;
     }
 
@@ -173,5 +161,22 @@ public class PlayerVisitor implements Visitor<String>{
     @Override
     public String evaluate(COMMENT comment) {
         return null;
+    }
+
+    private String getOctave(String octaveString){
+        String sign = octaveString.substring(0,1);
+        int octave;
+        if (sign.equals("+")) {
+            octave = 5 + Integer.valueOf(octaveString.substring(1));
+            if (octave > 10) {
+                octave = 10;
+            }
+        } else {
+            octave = 5 - Integer.valueOf(octaveString.substring(1));
+            if (octave < 0) {
+                octave = 0;
+            }
+        }
+        return Integer.toString(octave);
     }
 }

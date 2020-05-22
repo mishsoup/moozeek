@@ -30,6 +30,14 @@ public class LAYER extends INSTRUCTION {
         newName.parse();
     }
 
+    public List<NAME> getSubNames() {
+        return subNames;
+    }
+
+    public NAME getNewName() {
+        return newName;
+    }
+
     @Override
     public <T> T accept(Visitor<T> visitor) {
         return null;
