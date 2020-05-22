@@ -1,11 +1,10 @@
 package ast;
 
-import exceptions.WrongNameException;
 import libs.Node;
-import org.jfugue.pattern.PatternProducer;
+import visitors.Visitor;
 
 public class PLAY extends Node {
-    NAME name = new NAME();
+    public NAME name = new NAME();
 
     @Override
     public void parse() {
@@ -14,12 +13,9 @@ public class PLAY extends Node {
     }
 
     @Override
-    public void evaluate() {
-        try {
-            PatternProducer music = musicCreator.getSound(name.name);
-            musicCreator.getPlayer().play(music);
-        } catch (WrongNameException e) {
-            e.printStackTrace();
-        }
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.evaluate(this);
     }
+
+
 }

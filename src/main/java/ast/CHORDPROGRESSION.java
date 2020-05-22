@@ -1,7 +1,6 @@
 package ast;
 
-import java.util.ArrayList;
-import java.util.List;
+import visitors.Visitor;
 
 public class CHORDPROGRESSION extends BASESOUND {
     @Override
@@ -20,7 +19,9 @@ public class CHORDPROGRESSION extends BASESOUND {
     }
 
     @Override
-    public void evaluate() {
-
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.evaluate(this);
     }
+
+
 }

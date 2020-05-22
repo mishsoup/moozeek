@@ -1,12 +1,21 @@
 package ast;
 
-import org.jfugue.pattern.Pattern;
+import visitors.Visitor;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class JOIN extends INSTRUCTION {
     List<NAME> subNames = new ArrayList<>();
     NAME joinedName = new NAME();
+
+    public NAME getJoinedName() {
+        return joinedName;
+    }
+
+    public List<NAME> getSubNames() {
+        return subNames;
+    }
 
     @Override
     public void parse() {
@@ -29,11 +38,9 @@ public class JOIN extends INSTRUCTION {
     }
 
     @Override
-    public void evaluate() {
-        Pattern newSound = new Pattern();
-        for (NAME subName: subNames) {
-            newSound.add(musicCreator.getSound(subName.name));
-        }
-        musicCreator.addMusic(joinedName.name, newSound);
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.evaluate(this);
     }
+
+
 }

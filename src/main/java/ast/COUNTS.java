@@ -1,9 +1,10 @@
 package ast;
 
 import libs.Node;
+import visitors.Visitor;
 
 public class COUNTS extends Node {
-    String num;
+    public String num;
     // values we use for evaluate, can change to re later
     String[] values = new String[] {"1", "2", "3", "4", "5", "6", "7", "8"};
     @Override
@@ -12,7 +13,8 @@ public class COUNTS extends Node {
     }
 
     @Override
-    public void evaluate() {
-
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.evaluate(this);
     }
+
 }

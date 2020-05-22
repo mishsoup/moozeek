@@ -1,10 +1,10 @@
 package ast;
 
-import exceptions.DuplicateNameException;
+import visitors.Visitor;
 
 public class CREATE extends INSTRUCTION {
-    NAME name = new NAME();
-    SOUND sound = new SOUND();
+    public NAME name = new NAME();
+    public SOUND sound = new SOUND();
 
     @Override
     public void parse() {
@@ -15,8 +15,9 @@ public class CREATE extends INSTRUCTION {
     }
 
     @Override
-    public void evaluate() {
-        String songName = name.name;
-        musicCreator.addMusic(songName,musicCreator.createMusic(sound));
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.evaluate(this);
     }
+
+
 }
