@@ -1,6 +1,7 @@
 package ast;
 
 import org.jfugue.pattern.Pattern;
+import visitors.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +11,8 @@ public class CONNECT extends INSTRUCTION {
     public List<NAME> subNames = new ArrayList<>();
     public NAME newName = new NAME();
 
-    public NAME getJoinedName() {
-        return joinedName;
+    public NAME getNewName() {
+        return newName;
     }
 
     public List<NAME> getSubNames() {
@@ -39,17 +40,8 @@ public class CONNECT extends INSTRUCTION {
     }
 
     @Override
-<<<<<<< HEAD:src/main/java/ast/JOIN.java
     public <T> T accept(Visitor<T> visitor) {
         return visitor.evaluate(this);
-=======
-    public void evaluate() {
-        Pattern newSound = new Pattern();
-        for (NAME subName: subNames) {
-            newSound.add(musicCreator.getSound(subName.name));
-        }
-        musicCreator.addMusic(newName.name, newSound);
->>>>>>> kevin:src/main/java/ast/CONNECT.java
     }
 
 

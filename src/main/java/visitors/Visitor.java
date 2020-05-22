@@ -11,7 +11,7 @@ public interface Visitor<T> {
     T evaluate(COUNTVALUE countvalue);
     T evaluate(CREATE create);
     T evaluate(INSTRUMENT instrument);
-    T evaluate(JOIN join);
+    T evaluate(CONNECT connect);
     T evaluate(LENGTH length);
     T evaluate(MELODY melody);
     T evaluate(NAME name);
@@ -19,5 +19,7 @@ public interface Visitor<T> {
     T evaluate(PROGRAM program);
     T evaluate(REST rest);
     T evaluate(SOUND sound);
-    T evaluate(TITLE title);
+    T evaluate(LAYER layer);
+    T evaluate(BPM bpm);
+    T evaluate(COMMENT comment);
 }

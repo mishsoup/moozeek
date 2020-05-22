@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PlayerVisitor implements Visitor<String>{
     static protected MusicCreator musicCreator = MusicCreator.getMusicCreator();
-    private String defaultBPM;
+    private int defaultBPM;
 
     @Override
     public String evaluate(PLAY play) {
@@ -36,6 +36,8 @@ public class PlayerVisitor implements Visitor<String>{
         for (BASEKEY eachKey: chordprogression.notes) {
             musicString.append(" " + eachKey.accept(this) + " ");
         }
+        // TODO maybe we can take this line out and just directly return the string
+        // TODO to be considered later
         Pattern musicPattern = new Pattern(musicString.toString());
         return musicPattern.toString();
     }
@@ -64,15 +66,14 @@ public class PlayerVisitor implements Visitor<String>{
     }
 
     @Override
-    public String evaluate(JOIN join) {
-        List<NAME> names = join.getSubNames();
+    public String evaluate(CONNECT connect) {
+        List<NAME> names = connect.getSubNames();
         int nameListSize = names.size();
         Pattern song = new Pattern();
-        for (int i = nameListSize - 1; 0 <=  i ; i--) {
-            //prepend the previous song, since API only offers prepend we have to do it this way
-            song = song.prepend(musicCreator.getSound(names.get(i).name));
+        for (int i = 0; i < nameListSize ; i++) {
+            song.add(musicCreator.getSound(names.get(i).name));
         }
-        musicCreator.addMusicToSongs(join.getJoinedName().name, song);
+        musicCreator.addMusicToSongs(connect.getNewName().name, song);
         return null;
     }
 
@@ -109,6 +110,8 @@ public class PlayerVisitor implements Visitor<String>{
         for (BASEKEY eachKey: melody.notes) {
             musicString.append(" " + eachKey.accept(this) + " ");
         }
+        // TODO maybe we can take this line out and just directly return the string
+        // TODO to be considered later
         Pattern musicPattern = new Pattern(musicString.toString());
         return musicPattern.toString();
     }
@@ -126,10 +129,13 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(PROGRAM program) {
+        defaultBPM = Integer.parseInt(program.bpm.num);
         for (INSTRUCTION eachInstruction: program.instructions) {
             eachInstruction.accept(this);
         }
-        program.play.accept(this);
+        if (program.play != null) {
+            program.play.accept(this);
+        }
         return null;
     }
 
@@ -142,16 +148,30 @@ public class PlayerVisitor implements Visitor<String>{
     @Override
     public String evaluate(SOUND sound) {
         BEAT beat = sound.getBeat();
-        Pattern musicPattern = new Pattern("TIME:" + beat.counts.num + "/" + beat.countvalue);
+        Pattern musicPattern = new Pattern("TIME:" + beat.counts.num + "/" + beat.countvalue.value);
         musicPattern.add(sound.getBaseSound().accept(this));
         musicPattern.setInstrument(sound.getInstrument().instrument);
-        // TODO need to add BPM to the music pattern if it exist else use defaultBPM
-        // TODO wait until the parser finishes and BPM class is added
+        if (sound.bpm != null) {
+            musicPattern.setTempo(Integer.parseInt(sound.bpm.num));
+        } else {
+            musicPattern.setTempo(defaultBPM);
+        }
         return musicPattern.toString();
     }
 
     @Override
-    public String evaluate(TITLE title) {
+    public String evaluate(LAYER layer) {
+        // TODO
+        return null;
+    }
+
+    @Override
+    public String evaluate(BPM bpm) {
+        return null;
+    }
+
+    @Override
+    public String evaluate(COMMENT comment) {
         return null;
     }
 }

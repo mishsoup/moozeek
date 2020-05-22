@@ -7,8 +7,6 @@ public class CHORD extends BASEKEY {
     public void parse() {
         theNote = tokenizer.getNext();
         if (tokenizer.checkToken("-") || tokenizer.checkToken("+")) {
-            octave = new OCTAVE();
-            octave.parse();
         }
     }
 

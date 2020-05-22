@@ -9,7 +9,6 @@ import java.util.List;
 public abstract class BASEKEY extends Node {
     public String theNote;
     public String lengths;
-    public OCTAVE octave;
 
     public int getOctaveIndex(String str) {
         int addSignIndex = str.indexOf("+");

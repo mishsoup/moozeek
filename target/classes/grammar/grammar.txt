@@ -1,0 +1,29 @@
+PROGRAM ::= “Hello” INSTRUCTIONS // need to clean up
+INSTRUCTION ::= CREATE | JOIN | TRANSFORM | PLAY
+SONG ::= “[“ TITLE+ “]”
+PLAY ::= “Play ” SONG
+JOIN ::= “Join “  TITLE “,” TITLE (“,” TITLE)?
+
+/* SONG COMPOSURE */
+CREATE ::= “Title: “  TITLE  “Sound: ” SOUND
+SOUND ::= “[“ “Instrument “ INSTRUMENT (“Melody “  MELODY“ | Chords CHORD)  “Beat” BEAT “]”
+	/* SOUND */
+	INSTRUMENT ::= “Guitar” | “Piano” | … etc
+MELODY ::= FUNCTION | NOTE*
+NOTE ::= [A-G] LENGTH
+CHORD :: =  [A-G]+
+LENGTH ::= quarter | one | one half | two | (lol idk what the correct words are)
+LENGTH ::= “q”*
+
+	/* RHYTHMS */
+BEAT ::= “Time Signature: “ COUNTS “/“ COUNTVALUE “Tempo:“ [1-2]\d?|1\d{1}
+COUNTS ::= [1-8]
+COUNTVALUE ::= 16 | 8 | 4 | 2 | 1
+
+/* MISCELLANEOUS */
+TITLE ::= [A-Z | 0-9]+
+TRANSFORMATION ::= FUNCTION
+FUNCTION ::= OPERATION {VARIABLE | FUNCTION}
+
+
+ex) Hello CREATE Title: TestSong Sound: [Instrument: Guitar Aqq Bqq Cqq Dqqq Time Signature: 2/4].
