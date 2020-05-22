@@ -13,7 +13,7 @@ public class COMMENT extends INSTRUCTION {
 
     @Override
     public <T> T accept(Visitor<T> visitor) {
-        return null;
+        return visitor.evaluate(this);
     }
 
 }
