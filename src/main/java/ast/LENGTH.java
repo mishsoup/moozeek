@@ -3,7 +3,7 @@ package ast;
 import libs.Node;
 
 public class LENGTH extends Node {
-    // LENGTH ::= sixteenth | eighth | quarter | half | whole
+    // LENGTH ::= s i q h w
     String length;
     @Override
     public void parse() {

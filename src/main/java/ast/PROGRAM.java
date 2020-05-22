@@ -8,12 +8,14 @@ import java.util.List;
 public class PROGRAM extends Node {
     public BPM bpm = new BPM();
     public List<INSTRUCTION> instructions = new ArrayList<>();
-    public PLAY play;
+    // play optional
+    public PLAY play = null;
 
     @Override
     public void parse() {
         tokenizer.getAndCheckNext("START");
         bpm.parse();
+        tokenizer.getAndCheckNext(",");
         while(tokenizer.moreToken() && !tokenizer.checkToken(",")) {
             INSTRUCTION instruction = null;
             if (tokenizer.checkToken("CONNECT")) {
@@ -25,6 +27,7 @@ public class PROGRAM extends Node {
             } else if (tokenizer.checkToken("LAYER")) {
                 instruction = new LAYER();
             }
+            // TODO have not catch exception
             instruction.parse();
             instructions.add(instruction);
         }

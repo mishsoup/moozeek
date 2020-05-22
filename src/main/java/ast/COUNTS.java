@@ -3,12 +3,12 @@ package ast;
 import libs.Node;
 
 public class COUNTS extends Node {
-    public String num;
+    public String counts;
     // COUNTS ::= [1-8]
 
     @Override
     public void parse() {
-        num = tokenizer.getNext();
+        counts = tokenizer.getNext();
     }
 
     @Override

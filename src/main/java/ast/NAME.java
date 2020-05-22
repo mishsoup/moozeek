@@ -3,7 +3,7 @@ package ast;
 import libs.Node;
 
 public class NAME extends Node {
-    String name;
+    public String name;
     @Override
     public void parse() {
         name = tokenizer.getNext();
