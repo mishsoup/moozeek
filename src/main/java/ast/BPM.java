@@ -2,12 +2,14 @@ package ast;
 
 import libs.Node;
 
-public class COUNTS extends Node {
+public class BPM extends Node {
     public String num;
-    // COUNTS ::= [1-8]
+    // validate pattern 1 - 200
+    String pattern = "^([1-9]|[1-9][0-9]|[1][0-9][0-9]|20[0-0])$";
 
     @Override
     public void parse() {
+        tokenizer.getAndCheckNext("BPM:");
         num = tokenizer.getNext();
     }
 

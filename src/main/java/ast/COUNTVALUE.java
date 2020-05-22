@@ -3,9 +3,8 @@ package ast;
 import libs.Node;
 
 public class COUNTVALUE extends Node {
-    String value;
-    // values we use for evaluate
-    String[] values = new String[] {"sixteenth", "eighth", "quarter", "half", "whole"};
+    public String value;
+    // COUNTVALUE ::= 16 | 8| 4| 2
 
     @Override
     public void parse() {

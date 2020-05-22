@@ -5,7 +5,7 @@ import libs.Node;
 import org.jfugue.pattern.PatternProducer;
 
 public class PLAY extends Node {
-    NAME name = new NAME();
+    public NAME name = new NAME();
 
     @Override
     public void parse() {

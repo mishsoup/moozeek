@@ -1,10 +1,8 @@
 package ast;
 
-import exceptions.DuplicateNameException;
-
 public class CREATE extends INSTRUCTION {
-    NAME name = new NAME();
-    SOUND sound = new SOUND();
+    public NAME name = new NAME();
+    public SOUND sound = new SOUND();
 
     @Override
     public void parse() {

@@ -1,16 +1,18 @@
 package ast;
 
 import org.jfugue.pattern.Pattern;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class JOIN extends INSTRUCTION {
-    List<NAME> subNames = new ArrayList<>();
-    NAME joinedName = new NAME();
+public class CONNECT extends INSTRUCTION {
+    private String beginKey = "CONNECT";
+    public List<NAME> subNames = new ArrayList<>();
+    public NAME newName = new NAME();
 
     @Override
     public void parse() {
-        tokenizer.getAndCheckNext("JOIN");
+        tokenizer.getAndCheckNext(beginKey);
         NAME subName1 = new NAME();
         subName1.parse();
         subNames.add(subName1);
@@ -25,7 +27,7 @@ public class JOIN extends INSTRUCTION {
             subNames.add(subName);
         }
         tokenizer.getAndCheckNext("INTO");
-        joinedName.parse();
+        newName.parse();
     }
 
     @Override
@@ -34,6 +36,6 @@ public class JOIN extends INSTRUCTION {
         for (NAME subName: subNames) {
             newSound.add(musicCreator.getSound(subName.name));
         }
-        musicCreator.addMusic(joinedName.name, newSound);
+        musicCreator.addMusic(newName.name, newSound);
     }
 }

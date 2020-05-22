@@ -1,12 +1,13 @@
 package ast;
 
 public class NOTE extends BASEKEY {
+
     @Override
     public void parse() {
-        length = new LENGTH();
-        theNote = tokenizer.getNext();
-        tokenizer.getAndCheckNext(",");
-        length.parse();
+        String wholeNote = tokenizer.getNext();
+        int octaveIndex = getOctaveIndex(wholeNote);
+        theNote = wholeNote.substring(0, octaveIndex);
+
     }
 
     @Override
