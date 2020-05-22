@@ -64,15 +64,15 @@ public class PlayerVisitor implements Visitor<String>{
     }
 
     @Override
-    public String evaluate(JOIN join) {
-        List<NAME> names = join.getSubNames();
+    public String evaluate(CONNECT connect) {
+        List<NAME> names = connect.getSubNames();
         int nameListSize = names.size();
         Pattern song = new Pattern();
         for (int i = nameListSize - 1; 0 <=  i ; i--) {
             //prepend the previous song, since API only offers prepend we have to do it this way
             song = song.prepend(musicCreator.getSound(names.get(i).name));
         }
-        musicCreator.addMusicToSongs(join.getJoinedName().name, song);
+        musicCreator.addMusicToSongs(connect.getNewName().name, song);
         return null;
     }
 

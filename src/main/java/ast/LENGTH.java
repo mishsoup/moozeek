@@ -4,6 +4,7 @@ import libs.Node;
 import visitors.Visitor;
 
 public class LENGTH extends Node {
+    // LENGTH ::= s i q h w
     String length;
     @Override
     public void parse() {

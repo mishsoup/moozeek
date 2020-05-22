@@ -4,28 +4,40 @@ import libs.Node;
 import visitors.Visitor;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class PROGRAM extends Node {
+
+    public BPM bpm = new BPM();
     public List<INSTRUCTION> instructions = new ArrayList<>();
-    public PLAY play = new PLAY();
-    HashMap<String, String> songs = new HashMap<>();
+    public PLAY play = null;
 
     @Override
     public void parse() {
         tokenizer.getAndCheckNext("START");
-        while(!tokenizer.checkToken("PLAY")) {
+        bpm.parse();
+        tokenizer.getAndCheckNext(",");
+        while(tokenizer.moreToken() && !tokenizer.checkToken(",")) {
             INSTRUCTION instruction = null;
-            if (tokenizer.checkToken("JOIN")) {
-                instruction = new JOIN();
+            if (tokenizer.checkToken("CONNECT")) {
+                instruction = new CONNECT();
             } else if (tokenizer.checkToken("CREATE")) {
                 instruction = new CREATE();
+            } else if (tokenizer.checkToken("//")) {
+                instruction = new COMMENT();
+            } else if (tokenizer.checkToken("LAYER")) {
+                instruction = new LAYER();
             }
+            // TODO have not catch exception
             instruction.parse();
             instructions.add(instruction);
         }
-        play.parse();
+        // PLAY
+        if (tokenizer.checkToken(",")) {
+            tokenizer.getAndCheckNext(",");
+                play = new PLAY();
+                play.parse();
+        }
     }
 
     @Override
