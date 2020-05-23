@@ -9,7 +9,7 @@ import java.util.Map;
 public class MusicCreator {
 
     private static MusicCreator theMusicCreator;
-    private Map<String, Pattern> songs = new HashMap<String, Pattern>();
+    private static final Map<String, Pattern> songs = new HashMap<String, Pattern>();
     private Player player = new Player();
 
     public Player getPlayer (){
