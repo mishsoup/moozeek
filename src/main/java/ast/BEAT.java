@@ -4,8 +4,16 @@ import libs.Node;
 import visitors.Visitor;
 
 public class BEAT extends Node {
-    public COUNTS counts = new COUNTS();
-    public COUNTVALUE countvalue = new COUNTVALUE();
+    private COUNTS counts = new COUNTS();
+    private COUNTVALUE countvalue = new COUNTVALUE();
+
+    public COUNTS getCounts() {
+        return counts;
+    }
+
+    public COUNTVALUE getCountvalue() {
+        return countvalue;
+    }
 
     @Override
     public void parse() {

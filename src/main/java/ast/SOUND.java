@@ -4,11 +4,20 @@ import libs.Node;
 import visitors.Visitor;
 
 public class SOUND extends Node {
-    public INSTRUMENT instrument = new INSTRUMENT();
-    public BEAT beat = new BEAT();
-    public BASESOUND baseSound;
-    public BPM bpm = null;
+    private INSTRUMENT instrument = new INSTRUMENT();
+    private BEAT beat = new BEAT();
+    private BASESOUND baseSound;
+    private BPM bpm = null;
 
+    // getter
+    public INSTRUMENT getInstrument() { return instrument; }
+    public BEAT getBeat() {
+        return beat;
+    }
+    public BASESOUND getBaseSound() {
+        return baseSound;
+    }
+    public BPM getBpm() { return bpm; }
 
     @Override
     public void parse() {
@@ -26,8 +35,9 @@ public class SOUND extends Node {
             baseSound = new MELODY();
         } else if (tokenizer.checkToken("CHORD:")) {
             baseSound = new CHORDPROGRESSION();
+        } else {
+            throw new RuntimeException("Unknow baseSound:" + tokenizer.getNext());
         }
-        // TODO else exception
         baseSound.parse();
         tokenizer.getAndCheckNext("]");
     }
@@ -36,18 +46,4 @@ public class SOUND extends Node {
     public <T> T accept(Visitor<T> visitor) {
         return visitor.evaluate(this);
     }
-
-    public INSTRUMENT getInstrument() {
-        return instrument;
-    }
-
-    public BEAT getBeat() {
-        return beat;
-    }
-
-    public BASESOUND getBaseSound() {
-        return baseSound;
-    }
-
-
 }

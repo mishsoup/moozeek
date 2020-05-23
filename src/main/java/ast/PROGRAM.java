@@ -8,9 +8,14 @@ import java.util.List;
 
 public class PROGRAM extends Node {
 
-    public BPM bpm = new BPM();
-    public List<INSTRUCTION> instructions = new ArrayList<>();
-    public PLAY play = null;
+    private BPM bpm = new BPM();
+    private List<INSTRUCTION> instructions = new ArrayList<>();
+    private PLAY play = null;
+
+    // getter
+    public BPM getBpm() { return bpm; }
+    public List<INSTRUCTION> getInstructions() { return instructions; }
+    public PLAY getPlay() { return play; }
 
     @Override
     public void parse() {
@@ -27,8 +32,9 @@ public class PROGRAM extends Node {
                 instruction = new COMMENT();
             } else if (tokenizer.checkToken("LAYER")) {
                 instruction = new LAYER();
+            } else {
+                throw new RuntimeException("Unknown instruction: " + tokenizer.getNext());
             }
-            // TODO have not catch exception
             instruction.parse();
             instructions.add(instruction);
         }

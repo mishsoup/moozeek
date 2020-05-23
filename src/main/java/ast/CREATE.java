@@ -3,8 +3,16 @@ package ast;
 import visitors.Visitor;
 
 public class CREATE extends INSTRUCTION {
-    public NAME name = new NAME();
-    public SOUND sound = new SOUND();
+    private NAME name = new NAME();
+    private SOUND sound = new SOUND();
+
+    public NAME getName() {
+        return name;
+    }
+
+    public SOUND getSound() {
+        return sound;
+    }
 
     @Override
     public void parse() {

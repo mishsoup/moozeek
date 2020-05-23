@@ -2,12 +2,21 @@ package ast;
 
 import visitors.Visitor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MELODY extends BASESOUND {
+    private List<BASEKEY> notes = new ArrayList<>();
+
+    public List<BASEKEY> getNotes() {
+        return notes;
+    }
+
     @Override
     public void parse() {
         tokenizer.getAndCheckNext("MELODY:");
         while(!tokenizer.checkToken("]")) {
-            BASEKEY key = null;
+            BASEKEY key;
             if (tokenizer.checkToken("R")) {
                 key = new REST();
             } else {
@@ -17,7 +26,7 @@ public class MELODY extends BASESOUND {
             notes.add(key);
             while (tokenizer.checkToken(",")) {
                 tokenizer.getAndCheckNext(",");
-                BASEKEY key2 = null;
+                BASEKEY key2;
                 if (tokenizer.checkToken("R")) {
                     key2 = new REST();
                 } else {

@@ -1,6 +1,5 @@
 package ast;
 
-import org.jfugue.pattern.Pattern;
 import visitors.Visitor;
 
 import java.util.ArrayList;
@@ -8,8 +7,8 @@ import java.util.List;
 
 public class CONNECT extends INSTRUCTION {
     private String beginKey = "CONNECT";
-    List<NAME> subNames = new ArrayList<>();
-    NAME newName = new NAME();
+    private List<NAME> subNames = new ArrayList<>();
+    private NAME newName = new NAME();
 
     public NAME getNewName() {
         return newName;
@@ -29,7 +28,7 @@ public class CONNECT extends INSTRUCTION {
         NAME subName2 = new NAME();
         subName2.parse();
         subNames.add(subName2);
-        while(tokenizer.checkToken(",") && !tokenizer.checkToken("INTO")) {
+        while(tokenizer.checkToken(",")) {
             tokenizer.getAndCheckNext(",");
             NAME subName = new NAME();
             subName.parse();

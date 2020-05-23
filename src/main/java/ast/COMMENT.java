@@ -3,7 +3,12 @@ package ast;
 import visitors.Visitor;
 
 public class COMMENT extends INSTRUCTION {
-    public String comment;
+    private String comment;
+
+    public String getComment() {
+        return comment;
+    }
+
     @Override
     public void parse() {
         tokenizer.getAndCheckNext("//");

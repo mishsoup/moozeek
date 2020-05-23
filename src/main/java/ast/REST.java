@@ -6,8 +6,8 @@ public class REST extends BASEKEY {
     @Override
     public void parse() {
         tokenizer.getAndCheckNext("R");
-        theNote = "R";
-        lengths = tokenizer.getNext();
+        setTheNote("R");
+        setLengths(tokenizer.getNext());
     }
 
     @Override

@@ -4,7 +4,11 @@ import libs.Node;
 import visitors.Visitor;
 
 public class INSTRUMENT extends Node {
-    public String instrument;
+    private String instrument;
+
+    public String getInstrument() {
+        return instrument;
+    }
 
     @Override
     public void parse() {
