@@ -17,7 +17,7 @@ public class Main {
         PROGRAM program = new PROGRAM();
         program.parse();
         PlayerVisitor pv = new PlayerVisitor();
-        //program.accept(pv);
+        program.accept(pv);
 
 
     }
