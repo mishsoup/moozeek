@@ -1,29 +1,31 @@
-PROGRAM ::= “Hello” INSTRUCTIONS // need to clean up
-INSTRUCTION ::= CREATE | JOIN | TRANSFORM | PLAY
-SONG ::= “[“ TITLE+ “]”
-PLAY ::= “Play ” SONG
-JOIN ::= “Join “  TITLE “,” TITLE (“,” TITLE)?
+PROGRAM ::= “START” BPM “,” INSTRUCTION+ [“,” PLAY]?
+INSTRUCTION ::= CREATE | CONNECT | LAYER | COMMENT
+COMMENT ::= “//” STRING “//”
+PLAY ::= “PLAY” NAME 
+CONNECT ::= “CONNECT“  NAME (“,” NAME)+ “INTO” NAME
+LAYER::= “LAYER” NAME (“,” NAME)+ “INTO” NAME
 
 /* SONG COMPOSURE */
-CREATE ::= “Title: “  TITLE  “Sound: ” SOUND
-SOUND ::= “[“ “Instrument “ INSTRUMENT (“Melody “  MELODY“ | Chords CHORD)  “Beat” BEAT “]”
+CREATE ::= “CREATE“  NAME “,”  SOUND
+NAME ::=  STRING
+SOUND ::= “[“ INSTRUMENT “,” BEAT [“,” BPM]? “,” BASESOUND “]”
 	/* SOUND */
+BASESOUND ::= MELODY | CHORDPROGRESSION
 	INSTRUMENT ::= “Guitar” | “Piano” | … etc
-MELODY ::= FUNCTION | NOTE*
-NOTE ::= [A-G] LENGTH
-CHORD :: =  [A-G]+
-LENGTH ::= quarter | one | one half | two | (lol idk what the correct words are)
-LENGTH ::= “q”*
+            BASEKEY ::= NOTE | CHORD | REST
+MELODY ::= “MELODY:” ((NOTE | REST) (“,” (NOTE | REST))*
+
+REST ::= “R” LENGTH+ 
+(One Token) NOTE ::=  [A-G][# | b]? OCTAVE?  LENGTH+
+		q.
+		q     | q       | q          | *      | o
+LENGTH ::= s | i | q | h | w
+CHORDPROGRESSION ::= “CHORD:” ((CHORD | REST) (“,” (CHORD | REST))*
+CHORD :: =  [A-G][M|m]? OCTAVE?   LENGTH+ 
+OCTAVE ::= (- | +) [1-5]  
 
 	/* RHYTHMS */
-BEAT ::= “Time Signature: “ COUNTS “/“ COUNTVALUE “Tempo:“ [1-2]\d?|1\d{1}
+BEAT ::= COUNTS “/“ COUNTVALUE 
+BPM ::= “BPM: ” [1 - 200]
 COUNTS ::= [1-8]
-COUNTVALUE ::= 16 | 8 | 4 | 2 | 1
-
-/* MISCELLANEOUS */
-TITLE ::= [A-Z | 0-9]+
-TRANSFORMATION ::= FUNCTION
-FUNCTION ::= OPERATION {VARIABLE | FUNCTION}
-
-
-ex) Hello CREATE Title: TestSong Sound: [Instrument: Guitar Aqq Bqq Cqq Dqqq Time Signature: 2/4].
+COUNTVALUE ::= 16 | 8| 4| 2
