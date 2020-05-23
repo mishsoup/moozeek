@@ -34,7 +34,7 @@ public class PlayerVisitor implements Visitor<String>{
         if (chord.getTheNote().substring(1).equals("m")){
             tone = "min";
         }
-        return note+tone+octaveString+chord.getLengths();
+        return note+octaveString+tone+chord.getLengths();
     }
 
     @Override
