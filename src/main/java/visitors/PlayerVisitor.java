@@ -180,16 +180,21 @@ public class PlayerVisitor implements Visitor<String>{
         }
         String sign = octaveString.substring(0,1);
         int octave;
-        if (sign.equals("+")) {
-            octave = 5 + Integer.valueOf(octaveString.substring(1));
-            if (octave > 10) {
-                octave = 10;
-            }
-        } else {
-            octave = 5 - Integer.valueOf(octaveString.substring(1));
-            if (octave < 0) {
-                octave = 0;
-            }
+        switch(sign) {
+            case "+":
+                octave = 5 + Integer.valueOf(octaveString.substring(1));
+                if (octave > 10) {
+                    octave = 10;
+                }
+                break;
+            case "-":
+                octave = 5 - Integer.valueOf(octaveString.substring(1));
+                if (octave < 0) {
+                    octave = 0;
+                }
+                break;
+            default:
+                return "";
         }
         return Integer.toString(octave);
     }
