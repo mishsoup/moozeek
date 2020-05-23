@@ -11,9 +11,9 @@ public class COMMENT extends INSTRUCTION {
 
     @Override
     public void parse() {
-        tokenizer.getAndCheckNext("//");
+        tokenizer.getAndCheckNext("&");
         comment = tokenizer.getNext();
-        tokenizer.getAndCheckNext("//");
+        tokenizer.getAndCheckNext("&");
     }
 
     @Override

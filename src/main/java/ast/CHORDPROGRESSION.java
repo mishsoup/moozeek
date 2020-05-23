@@ -15,9 +15,9 @@ public class CHORDPROGRESSION extends BASESOUND {
     @Override
     public void parse() {
         tokenizer.getAndCheckNext("CHORD:");
-        while(!tokenizer.checkToken("]")) {
+        while(!tokenizer.checkToken("\\]")) {
             BASEKEY key;
-            if (tokenizer.checkToken("R")) {
+            if (tokenizer.checkToken("REST")) {
                 key = new REST();
             } else {
                 key = new CHORD();
@@ -27,7 +27,7 @@ public class CHORDPROGRESSION extends BASESOUND {
             while (tokenizer.checkToken(",")) {
                 tokenizer.getAndCheckNext(",");
                 BASEKEY key2;
-                if (tokenizer.checkToken("R")) {
+                if (tokenizer.checkToken("REST")) {
                     key2 = new REST();
                 } else {
                     key2 = new CHORD();

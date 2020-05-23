@@ -5,8 +5,8 @@ import visitors.Visitor;
 public class REST extends BASEKEY {
     @Override
     public void parse() {
-        tokenizer.getAndCheckNext("R");
-        setTheNote("R");
+        tokenizer.getAndCheckNext("REST");
+        setTheNote("REST");
         setLengths(tokenizer.getNext());
     }
 

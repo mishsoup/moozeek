@@ -2,8 +2,6 @@ package visitors;
 
 import ast.LENGTH;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class PlayerVisitorTest {
     LENGTH length = new LENGTH();
 

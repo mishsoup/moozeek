@@ -21,7 +21,7 @@ public class SOUND extends Node {
 
     @Override
     public void parse() {
-        tokenizer.getAndCheckNext("[");
+        tokenizer.getAndCheckNext("\\[");
         instrument.parse();
         tokenizer.getAndCheckNext(",");
         beat.parse();
@@ -39,7 +39,7 @@ public class SOUND extends Node {
             throw new RuntimeException("Unknow baseSound:" + tokenizer.getNext());
         }
         baseSound.parse();
-        tokenizer.getAndCheckNext("]");
+        tokenizer.getAndCheckNext("\\]");
     }
 
     @Override

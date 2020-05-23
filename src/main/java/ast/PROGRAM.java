@@ -22,13 +22,13 @@ public class PROGRAM extends Node {
         tokenizer.getAndCheckNext("START");
         bpm.parse();
         tokenizer.getAndCheckNext(",");
-        while(tokenizer.moreToken() && !tokenizer.checkToken(",")) {
+        while(tokenizer.moreTokens() && !tokenizer.checkToken(",")) {
             INSTRUCTION instruction = null;
             if (tokenizer.checkToken("CONNECT")) {
                 instruction = new CONNECT();
             } else if (tokenizer.checkToken("CREATE")) {
                 instruction = new CREATE();
-            } else if (tokenizer.checkToken("//")) {
+            } else if (tokenizer.checkToken("&")) {
                 instruction = new COMMENT();
             } else if (tokenizer.checkToken("LAYER")) {
                 instruction = new LAYER();
