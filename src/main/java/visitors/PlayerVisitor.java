@@ -112,7 +112,7 @@ public class PlayerVisitor implements Visitor<String>{
     @Override
     public String evaluate(NOTE note) {
         String octaveString = getOctave(note.getOctave());
-        return note.getTheNote() + octaveString+note.getLengths();
+        return note.getTheNote()+octaveString+note.getLengths();
     }
 
     @Override
