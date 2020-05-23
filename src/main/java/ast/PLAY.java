@@ -4,7 +4,11 @@ import libs.Node;
 import visitors.Visitor;
 
 public class PLAY extends Node {
-    public NAME name = new NAME();
+    private NAME name = new NAME();
+
+    public NAME getName() {
+        return name;
+    }
 
     @Override
     public void parse() {

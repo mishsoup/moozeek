@@ -1,0 +1,9 @@
+START
+BPM: 100,
+CREATE Music Guitar, [Guitar, 4/4, MELODY: C+4s , D#+4q  , Eb-4i , Fbq, REST iiii, A#+3hwsiq]
+CREATE Music Piano, [Piano, 4/4, CHORD: CM-2q, REST siqhw, Dm+1q, Ew, F4s]
+LAYER Music Guitar, Music Piano INTO MusicGuitarAndPiano
+& do want I want &
+CONNECT Music Guitar, Music Piano INTO LayerTest
+, PLAY LayerTest
+

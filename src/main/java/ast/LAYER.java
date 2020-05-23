@@ -7,8 +7,15 @@ import java.util.List;
 
 public class LAYER extends INSTRUCTION {
     private String beginKey = "LAYER";
-    public List<NAME> subNames = new ArrayList<>();
-    public NAME newName = new NAME();
+    private List<NAME> subNames = new ArrayList<>();
+    private NAME newName = new NAME();
+
+    public List<NAME> getSubNames() {
+        return subNames;
+    }
+    public NAME getNewName() {
+        return newName;
+    }
 
     @Override
     public void parse() {
@@ -20,7 +27,7 @@ public class LAYER extends INSTRUCTION {
         NAME subName2 = new NAME();
         subName2.parse();
         subNames.add(subName2);
-        while(tokenizer.checkToken(",") && !tokenizer.checkToken("INTO")) {
+        while(tokenizer.checkToken(",")) {
             tokenizer.getAndCheckNext(",");
             NAME subName = new NAME();
             subName.parse();
@@ -28,14 +35,6 @@ public class LAYER extends INSTRUCTION {
         }
         tokenizer.getAndCheckNext("INTO");
         newName.parse();
-    }
-
-    public List<NAME> getSubNames() {
-        return subNames;
-    }
-
-    public NAME getNewName() {
-        return newName;
     }
 
     @Override

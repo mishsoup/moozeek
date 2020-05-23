@@ -10,17 +10,17 @@ public class CHORD extends BASEKEY {
         int octaveIndex = getOctaveIndex(wholeNote);
         int lengthsIndex;
         if (mOrMIndex > 0) {
-            theNote = wholeNote.substring(0, mOrMIndex + 1);
+            setTheNote(wholeNote.substring(0, mOrMIndex + 1));
             lengthsIndex = mOrMIndex + 1;
         } else {
-            theNote = wholeNote.substring(0, 1);
+            setTheNote(wholeNote.substring(0, 1));
             lengthsIndex = 1;
         }
         if (octaveIndex > 0) {
-            octave = wholeNote.substring(octaveIndex, octaveIndex + 2);
+            setOctave(wholeNote.substring(octaveIndex, octaveIndex + 2));
             lengthsIndex = octaveIndex + 2;
         }
-        lengths = wholeNote.substring(lengthsIndex);
+        setLengths(wholeNote.substring(lengthsIndex));
     }
 
     private int getIndexOfMorm(String str) {

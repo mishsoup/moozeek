@@ -14,7 +14,9 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(PLAY play) {
-        PatternProducer music = musicCreator.getSound(play.name.name);
+        NAME name = play.getName();
+        String nameValue = name.getName();
+        PatternProducer music = musicCreator.getSound(nameValue);
         musicCreator.getPlayer().play(music);
         return null;
     }
@@ -26,19 +28,19 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(CHORD chord) {
-        String octaveString = getOctave(chord.octave);
-        String note = chord.theNote.substring(0,1);
+        String octaveString = getOctave(chord.getOctave());
+        String note = chord.getTheNote().substring(0,1);
         String tone = "maj";
-        if (chord.theNote.substring(1).equals("m")){
+        if (chord.getTheNote().substring(1).equals("m")){
             tone = "min";
         }
-        return note+tone+octaveString+chord.lengths;
+        return note+tone+octaveString+chord.getLengths();
     }
 
     @Override
     public String evaluate(CHORDPROGRESSION chordprogression) {
         StringBuilder musicString = new StringBuilder("");
-        for (BASEKEY eachKey: chordprogression.notes) {
+        for (BASEKEY eachKey: chordprogression.getNotes()) {
             musicString.append(" " + eachKey.accept(this) + " ");
         }
         // TODO maybe we can take this line out and just directly return the string
@@ -59,9 +61,11 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(CREATE create) {
-        String songName = create.name.name;
-        Pattern pattern = new Pattern(create.sound.accept(this));
-        musicCreator.addMusicToSongs(songName,pattern);
+        NAME name = create.getName();
+        SOUND sound = create.getSound();
+        String songName = name.getName();
+        Pattern pattern = new Pattern(sound.accept(this));
+        musicCreator.addMusicToSongs(songName, pattern);
         return null;
     }
 
@@ -76,9 +80,9 @@ public class PlayerVisitor implements Visitor<String>{
         int nameListSize = names.size();
         Pattern song = new Pattern();
         for (int i = 0; i < nameListSize ; i++) {
-            song.add(musicCreator.getSound(names.get(i).name));
+            song.add(musicCreator.getSound(names.get(i).getName()));
         }
-        musicCreator.addMusicToSongs(connect.getNewName().name, song);
+        musicCreator.addMusicToSongs(connect.getNewName().getName(), song);
         return null;
     }
 
@@ -90,7 +94,7 @@ public class PlayerVisitor implements Visitor<String>{
     @Override
     public String evaluate(MELODY melody) {
         StringBuilder musicString = new StringBuilder("");
-        for (BASEKEY eachKey: melody.notes) {
+        for (BASEKEY eachKey: melody.getNotes()) {
             musicString.append(" " + eachKey.accept(this) + " ");
         }
         // TODO maybe we can take this line out and just directly return the string
@@ -106,35 +110,39 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(NOTE note) {
-        String octaveString = getOctave(note.octave);
-        return note.theNote+octaveString+note.lengths;
+        String octaveString = getOctave(note.getOctave());
+        return note.getTheNote() + octaveString+note.getLengths();
     }
 
     @Override
     public String evaluate(PROGRAM program) {
-        defaultBPM = Integer.parseInt(program.bpm.bpm);
-        for (INSTRUCTION eachInstruction: program.instructions) {
+        BPM bpm = program.getBpm();
+        defaultBPM = Integer.parseInt(bpm.getBpm());
+        for (INSTRUCTION eachInstruction: program.getInstructions()) {
             eachInstruction.accept(this);
         }
-        if (program.play != null) {
-            program.play.accept(this);
+        if (program.getPlay() != null) {
+            program.getPlay().accept(this);
         }
         return null;
     }
 
     @Override
     public String evaluate(REST rest) {
-        return "R"+rest.lengths;
+        return "R"+rest.getLengths();
     }
 
     @Override
     public String evaluate(SOUND sound) {
         BEAT beat = sound.getBeat();
-        Pattern musicPattern = new Pattern("TIME:" + beat.counts.num + "/" + beat.countvalue.countValue);
+        COUNTS counts = beat.getCounts();
+        COUNTVALUE countvalue = beat.getCountvalue();
+        Pattern musicPattern = new Pattern("TIME:" + counts.getCounts() + "/" + countvalue.getCountValue());
         musicPattern.add(sound.getBaseSound().accept(this));
-        musicPattern.setInstrument(sound.getInstrument().instrument);
-        if (sound.bpm != null) {
-            musicPattern.setTempo(Integer.parseInt(sound.bpm.bpm));
+        INSTRUMENT instrument = sound.getInstrument();
+        musicPattern.setInstrument(instrument.getInstrument());
+        if (sound.getBpm() != null) {
+            musicPattern.setTempo(Integer.parseInt(sound.getBpm().getBpm()));
         } else {
             musicPattern.setTempo(defaultBPM);
         }
@@ -147,9 +155,9 @@ public class PlayerVisitor implements Visitor<String>{
         int nameListSize = names.size();
         Pattern song = new Pattern();
         for (int i = 0; i < nameListSize ; i++) {
-            song.add(musicCreator.getSound(names.get(i).name).setVoice(i));
+            song.add(musicCreator.getSound(names.get(i).getName()).setVoice(i));
         }
-        musicCreator.addMusicToSongs(layer.getNewName().name, song);
+        musicCreator.addMusicToSongs(layer.getNewName().getName(), song);
         return null;
     }
 

@@ -1,16 +1,9 @@
 package libs;
 
-import ast.BASEKEY;
-import ast.BASESOUND;
-import ast.SOUND;
-import exceptions.DuplicateNameException;
-import exceptions.WrongNameException;
 import org.jfugue.pattern.Pattern;
-import org.jfugue.pattern.PatternProducer;
 import org.jfugue.player.Player;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MusicCreator {

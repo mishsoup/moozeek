@@ -4,7 +4,12 @@ import libs.Node;
 import visitors.Visitor;
 
 public class NAME extends Node {
-    public String name;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
     @Override
     public void parse() {
         name = tokenizer.getNext();
