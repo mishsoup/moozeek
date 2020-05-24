@@ -83,6 +83,7 @@ public class PlayerVisitor implements Visitor<String>{
             song.add(musicCreator.getSound(names.get(i).getName()));
         }
         musicCreator.addMusicToSongs(connect.getNewName().getName(), song);
+        //TODO remove this line, only for debugging
         System.out.println(song);
         return null;
     }
@@ -161,6 +162,8 @@ public class PlayerVisitor implements Visitor<String>{
             song.add(newSongSetName);
         }
         musicCreator.addMusicToSongs(layer.getNewName().getName(), song);
+        //TODO remove this line, only for debugging
+        System.out.println(song);
         return null;
     }
 
@@ -176,7 +179,7 @@ public class PlayerVisitor implements Visitor<String>{
 
     private String getOctave(String octaveString){
         if (octaveString == null) {
-            return "";
+            return "5";
         }
         String sign = octaveString.substring(0,1);
         int octave;
@@ -194,7 +197,7 @@ public class PlayerVisitor implements Visitor<String>{
                 }
                 break;
             default:
-                return "";
+                return "5";
         }
         return Integer.toString(octave);
     }
