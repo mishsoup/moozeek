@@ -16,7 +16,7 @@ BASESOUND ::= MELODY | CHORDPROGRESSION
 MELODY ::= “MELODY:” ((NOTE | REST) (“,” (NOTE | REST))*
 
 REST ::= “R” LENGTH+ 
-(One Token) NOTE ::=  [A-G][# | b]? OCTAVE?  LENGTH+
+(One Token) NOTE ::=  [A-G][# | b]?[M|m]? OCTAVE?  LENGTH+
 		q.
 		q     | q       | q          | *      | o
 LENGTH ::= s | i | q | h | w

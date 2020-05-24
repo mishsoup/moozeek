@@ -8,7 +8,7 @@ public class NOTE extends BASEKEY {
     public void parse() {
         String wholeNote = tokenizer.getNext();
         int sharpOrbIndex = getIndexOfSharpOrb(wholeNote);
-        int octaveIndex = getOctaveIndex(wholeNote);
+        int octaveIndex = getIndex(wholeNote, "+", "-");
         int lengthsIndex;
         if (sharpOrbIndex > 0) {
             setTheNote(wholeNote.substring(0, sharpOrbIndex + 1));

@@ -25,9 +25,9 @@ public abstract class BASEKEY extends Node {
     public void setOctave(String octave) { this.octave = octave; }
     public void setTheNote(String theNote) { this.theNote = theNote; }
 
-    public int getOctaveIndex(String str) {
-        int addSignIndex = str.indexOf("+");
-        int minusSignIndex = str.indexOf("-");
+    public int getIndex(String str, String key1, String key2) {
+        int addSignIndex = str.indexOf(key1);
+        int minusSignIndex = str.indexOf(key2);
         return Math.max(addSignIndex, minusSignIndex);
     }
 
