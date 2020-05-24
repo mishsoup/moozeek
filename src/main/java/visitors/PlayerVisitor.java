@@ -34,7 +34,7 @@ public class PlayerVisitor implements Visitor<String>{
         if (chord.getTheNote().substring(1).equals("m")){
             tone = "min";
         }
-        return note+tone+octaveString+chord.getLengths();
+        return note+octaveString+tone+chord.getLengths();
     }
 
     @Override
@@ -83,6 +83,7 @@ public class PlayerVisitor implements Visitor<String>{
             song.add(musicCreator.getSound(names.get(i).getName()));
         }
         musicCreator.addMusicToSongs(connect.getNewName().getName(), song);
+        //TODO remove this line, only for debugging
         System.out.println(song);
         return null;
     }
@@ -112,7 +113,7 @@ public class PlayerVisitor implements Visitor<String>{
     @Override
     public String evaluate(NOTE note) {
         String octaveString = getOctave(note.getOctave());
-        return note.getTheNote() + octaveString+note.getLengths();
+        return note.getTheNote()+octaveString+note.getLengths();
     }
 
     @Override
@@ -161,6 +162,8 @@ public class PlayerVisitor implements Visitor<String>{
             song.add(newSongSetName);
         }
         musicCreator.addMusicToSongs(layer.getNewName().getName(), song);
+        //TODO remove this line, only for debugging
+        System.out.println(song);
         return null;
     }
 
@@ -176,20 +179,25 @@ public class PlayerVisitor implements Visitor<String>{
 
     private String getOctave(String octaveString){
         if (octaveString == null) {
-            return "";
+            return "5";
         }
         String sign = octaveString.substring(0,1);
         int octave;
-        if (sign.equals("+")) {
-            octave = 5 + Integer.valueOf(octaveString.substring(1));
-            if (octave > 10) {
-                octave = 10;
-            }
-        } else {
-            octave = 5 - Integer.valueOf(octaveString.substring(1));
-            if (octave < 0) {
-                octave = 0;
-            }
+        switch(sign) {
+            case "+":
+                octave = 5 + Integer.valueOf(octaveString.substring(1));
+                if (octave > 10) {
+                    octave = 10;
+                }
+                break;
+            case "-":
+                octave = 5 - Integer.valueOf(octaveString.substring(1));
+                if (octave < 0) {
+                    octave = 0;
+                }
+                break;
+            default:
+                return "5";
         }
         return Integer.toString(octave);
     }
