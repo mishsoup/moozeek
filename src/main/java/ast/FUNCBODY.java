@@ -13,7 +13,6 @@ public class FUNCBODY extends Node{
     public List<String> getParaNames() {
         return paraNames;
     }
-
     public List<INSTRUCTION> getInstructions() {
         return instructions;
     }
@@ -55,6 +54,6 @@ public class FUNCBODY extends Node{
 
     @Override
     public <T> T accept(Visitor<T> visitor) {
-        return null;
+        return visitor.evaluate(this);
     }
 }

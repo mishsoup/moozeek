@@ -24,6 +24,6 @@ public class FUNC extends Node {
 
     @Override
     public <T> T accept(Visitor<T> visitor) {
-        return null;
+        return visitor.evaluate(this);
     }
 }

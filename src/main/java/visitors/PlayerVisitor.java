@@ -118,6 +118,9 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(PROGRAM program) {
+        for (FUNC eachFunc: program.getFuncs()) {
+            eachFunc.accept(this);
+        }
         BPM bpm = program.getBpm();
         defaultBPM = Integer.parseInt(bpm.getBpm());
         for (INSTRUCTION eachInstruction: program.getInstructions()) {
@@ -189,6 +192,9 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(FUNCBODY funcbody) {
+        for (INSTRUCTION eachInstruction: funcbody.getInstructions()) {
+            eachInstruction.accept(this);
+        }
         return null;
     }
 
