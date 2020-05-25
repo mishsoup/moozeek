@@ -3,7 +3,7 @@ package ast;
 import libs.Node;
 import visitors.Visitor;
 
-public class SOUND extends Node {
+public class SOUND extends Node implements EXP {
     private INSTRUMENT instrument = new INSTRUMENT();
     private BEAT beat = new BEAT();
     private BASESOUND baseSound;
