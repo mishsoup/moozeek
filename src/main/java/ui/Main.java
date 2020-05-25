@@ -12,7 +12,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         List<String> literals = Arrays.asList("START", ",", "[", "]", "PLAY", "CONNECT", "INTO", "LAYER", "/", "MELODY:"
-        , "REST", "CHORD:", "CREATE", "BPM:", "&", "FUNC", "RUN", "{", "}");
+        , "REST", "CHORD:", "CREATE", "BPM:", "&", "DEF", "RUN", "{", "}");
         Tokenizer.makeTokenizer("input.music",literals);
         PROGRAM program = new PROGRAM();
         program.parse();
