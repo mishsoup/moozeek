@@ -22,7 +22,7 @@ public class PROGRAM extends Node {
     @Override
     public void parse() {
         tokenizer.getAndCheckNext("START");
-        while (tokenizer.checkToken("FUNC")) {
+        while (tokenizer.checkToken("DEF")) {
             FUNC func = new FUNC();
             func.parse();
             funcs.add(func);

@@ -16,7 +16,7 @@ public class PlayerVisitor implements Visitor<String>{
     public String evaluate(PLAY play) {
         NAME name = play.getName();
         String nameValue = name.getName();
-        PatternProducer music = musicCreator.getSound(nameValue);
+        Pattern music = musicCreator.getSound(nameValue);
         musicCreator.getPlayer().play(music);
         return null;
     }
@@ -174,6 +174,21 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(COMMENT comment) {
+        return null;
+    }
+
+    @Override
+    public String evaluate(RUN run) {
+        return null;
+    }
+
+    @Override
+    public String evaluate(FUNC func) {
+        return null;
+    }
+
+    @Override
+    public String evaluate(FUNCBODY funcbody) {
         return null;
     }
 

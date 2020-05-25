@@ -6,7 +6,7 @@ import visitors.Visitor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FUNCBODY extends Node implements EXP {
+public class FUNCBODY extends Node{
     List<String> paraNames = new ArrayList<>();
     List<INSTRUCTION> instructions = new ArrayList<>();
 
