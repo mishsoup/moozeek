@@ -1,5 +1,6 @@
 package libs;
 
+import ast.FUNCBODY;
 import org.jfugue.pattern.Pattern;
 import org.jfugue.player.Player;
 
@@ -20,8 +21,16 @@ public class MusicCreator {
         songs.put(name, pattern);
     }
 
+    public void addFuncBodyToSongs(String name, FUNCBODY funcbody) {
+        songs.put(name,funcbody);
+    }
+
     public Pattern getSound(String name) {
         return (Pattern) songs.get(name);
+    }
+
+    public FUNCBODY getFuncbody(String name) {
+        return (FUNCBODY) songs.get(name);
     }
 
     // use for test case
