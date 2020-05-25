@@ -84,7 +84,7 @@ public class PlayerVisitor implements Visitor<String>{
         }
         musicCreator.addMusicToSongs(connect.getNewName().getName(), song);
         //TODO remove this line, only for debugging
-        System.out.println(song);
+        //System.out.println(song);
         return null;
     }
 
@@ -172,16 +172,25 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(BPM bpm) {
-        return null;
+        return bpm.getBpm();
     }
 
     @Override
     public String evaluate(COMMENT comment) {
-        return null;
+        return comment.getComment();
     }
 
     @Override
     public String evaluate(RUN run) {
+        String functionName = run.getFuncName();
+        List<String> paraValues = run.getParaNames();
+        FUNCBODY funcbody = musicCreator.getFuncbody(functionName);
+        List<String> paraNames = funcbody.getParaNames();
+        for (int i = 0; i < paraNames.size(); i++) {
+            Pattern pattern = musicCreator.getSound(paraValues.get(i));
+            musicCreator.addMusicToSongs(paraNames.get(i), pattern);
+        }
+        funcbody.accept(this);
         return null;
     }
 
