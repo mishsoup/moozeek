@@ -17,7 +17,9 @@ public class FUNC extends Node {
 
     @Override
     public void parse() {
-
+        tokenizer.getAndCheckNext("DEF");
+        name = tokenizer.getNext();
+        funcbody.parse();
     }
 
     @Override

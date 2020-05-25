@@ -22,4 +22,7 @@ public interface Visitor<T> {
     T evaluate(LAYER layer);
     T evaluate(BPM bpm);
     T evaluate(COMMENT comment);
+    T evaluate(RUN run);
+    T evaluate(FUNC func);
+    T evaluate(FUNCBODY funcbody);
 }
