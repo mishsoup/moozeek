@@ -55,6 +55,10 @@ public class PROGRAM extends Node {
         }
     }
 
+    public List<FUNC> getFunctions() {
+        return funcs;
+    }
+
     @Override
     public <T> T accept(Visitor<T> visitor) {
         return visitor.evaluate(this);
