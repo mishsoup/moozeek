@@ -8,10 +8,10 @@ public class REST extends BASEKEY {
         tokenizer.getAndCheckNext("REST");
         setTheNote("REST");
         String lengths = tokenizer.getNext();
-        if (isCorrectInput(pattern, lengths)) {
+        if (isCorrectInput(lengthPattern, lengths)) {
             setLengths(tokenizer.getNext());
         } else {
-            throw new RuntimeException("The LENGTH in REST should only have: " + pattern + ". But input is " + lengths);
+            throw new RuntimeException("The LENGTH in REST should only have: " + lengthPattern + ". But input is " + lengths);
         }
     }
 

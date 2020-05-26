@@ -18,14 +18,19 @@ public class NOTE extends BASEKEY {
             lengthsIndex = 1;
         }
         if (octaveIndex > 0) {
-            setOctave(wholeNote.substring(octaveIndex, octaveIndex + 2));
-            lengthsIndex = octaveIndex + 2;
+            String octave = wholeNote.substring(octaveIndex, octaveIndex + 2);
+            if (isCorrectInput(octavePattern, octave)) {
+                setOctave(octave);
+                lengthsIndex = octaveIndex + 2;
+            } else {
+                throw new RuntimeException("The OCTAVE in NOTE should only have: " + octavePattern + ". But input is " + octave);
+            }
         }
         String lengths = wholeNote.substring(lengthsIndex);
-        if (isCorrectInput(pattern, lengths)) {
+        if (isCorrectInput(lengthPattern, lengths)) {
             setLengths(wholeNote.substring(lengthsIndex));
         } else {
-            throw new RuntimeException("The LENGTH in NOTE should only have: " + pattern + ". But input is " + lengths);
+            throw new RuntimeException("The LENGTH in NOTE should only have: " + lengthPattern + ". But input is " + lengths);
         }
     }
 
