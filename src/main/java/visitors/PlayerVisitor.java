@@ -14,7 +14,10 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(PLAY play) {
-        musicCreator.getPlayer().play(play.getName().accept(this));
+        NAME name = play.getName();
+        String nameValue = name.getName();
+        Pattern music = musicCreator.getSound(nameValue);
+        musicCreator.getPlayer().play(music);
         return null;
     }
 
@@ -77,8 +80,7 @@ public class PlayerVisitor implements Visitor<String>{
         int nameListSize = names.size();
         Pattern song = new Pattern();
         for (int i = 0; i < nameListSize ; i++) {
-            Pattern pattern = musicCreator.getSound(names.get(i).getName());
-            song.add(pattern);
+            song.add(musicCreator.getSound(names.get(i).getName()));
         }
         musicCreator.addMusicToSongs(connect.getNewName().getName(), song);
         //TODO remove this line, only for debugging
@@ -105,7 +107,7 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(NAME name) {
-        return musicCreator.getSound(name.getName()).toString();
+        return null;
     }
 
     @Override
@@ -156,7 +158,7 @@ public class PlayerVisitor implements Visitor<String>{
         int nameListSize = names.size();
         Pattern song = new Pattern();
         for (int i = 0; i < nameListSize ; i++) {
-            Pattern newSongSetName = new Pattern(names.get(i).accept(this));
+            Pattern newSongSetName = new Pattern(musicCreator.getSound(names.get(i).getName()));
             newSongSetName.setVoice(i);
             song.add(newSongSetName);
         }
