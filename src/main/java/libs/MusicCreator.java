@@ -26,10 +26,16 @@ public class MusicCreator {
     }
 
     public Pattern getSound(String name) {
+        if (!songs.containsKey(name)) {
+            throw new RuntimeException("Song: " + name + " is not declared");
+        }
         return (Pattern) songs.get(name);
     }
 
     public FUNCBODY getFuncbody(String name) {
+        if (!songs.containsKey(name)) {
+            throw new RuntimeException("func: " + name + " is not declared");
+        }
         return (FUNCBODY) songs.get(name);
     }
 
