@@ -51,7 +51,7 @@ public class MusicCreator {
 
     public Pattern getSound(String name, Map<String, Integer> environmentTable) {
         if (!environmentTable.containsKey(name)) {
-            throw new RuntimeException("Song: " + name + " is not declared");
+            throw new RuntimeException("Song Error: " + name + " is not declared. \n");
         }
         Integer address = environmentTable.get(name);
         return (Pattern) memoryTable.get(address);
@@ -59,7 +59,7 @@ public class MusicCreator {
 
     public FUNCBODY getFuncbody(String name, Map<String, Integer> environmentTable) {
         if (!environmentTable.containsKey(name)) {
-            throw new RuntimeException("func: " + name + " is not declared");
+            throw new RuntimeException("Func Error: " + name + " is not declared. \n");
         }
         Integer address = environmentTable.get(name);
         return (FUNCBODY) memoryTable.get(address);
