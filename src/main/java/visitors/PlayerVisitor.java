@@ -203,9 +203,25 @@ public class PlayerVisitor implements Visitor<Map<String, Integer>, String>{
             musicCreator.addMusicToSongs(paraName, pattern, funEnv);
         }
         funcbody.accept(this, funEnv);
+
         // TODO we need to clean the memory which point by funEnv
         // TODO 1) find out all not REF parameters' address
+        Map<String, Boolean> funcScopeTable = funcbody.getTableForCheckScope();
+        List<String> nonRefName = new ArrayList<>();
+        for (Map.Entry<String,Boolean> entry : funcScopeTable.entrySet()) {
+            if (!entry.getValue()) {
+                nonRefName.add(entry.getKey());
+            }
+        }
+        List<Integer> nonRefAddress = new ArrayList<>();
+        for (String eachName: nonRefName) {
+            nonRefAddress.add(funEnv.get(eachName));
+        }
+
         // TODO 2) use this address delete it in memoryTable
+        for (Integer eachAddress: nonRefAddress) {
+            musicCreator.getMemoryTable().remove(eachAddress);
+        }
         return null;
     }
 

@@ -12,6 +12,8 @@ public class FUNCBODY extends Node{
     List<String> paraNames = new ArrayList<>();
     List<INSTRUCTION> instructions = new ArrayList<>();
     Map<String, Boolean> tableForCheckScope = new HashMap<>();
+    // false means, actual value
+    // true means reference
 
     public List<String> getParaNames() {
         return paraNames;

@@ -19,6 +19,10 @@ public class MusicCreator {
         return memoryAddress;
     }
 
+    public Map<Integer, Object> getMemoryTable() {
+        return memoryTable;
+    }
+
     public Player getPlayer (){
         return player;
     }

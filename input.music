@@ -7,5 +7,6 @@ CREATE Music Piano, [Piano, 4/4, CHORD: AbMsiw, Bs, Cs]
 LAYER Music Guitar, Music Piano INTO MusicGuitarAndPiano
 & do want I want &
 RUN repeat (Music Piano, Music Piano, Music Guitar)
-, PLAY Music Piano
+,
+PLAY Music Piano
 
