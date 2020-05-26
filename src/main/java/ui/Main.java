@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        List<String> literals = Arrays.asList("START", ",", "[", "]", "PLAY", "CONNECT", "INTO", "LAYER", "/", "MELODY:"
+        List<String> literals = Arrays.asList(",", "[", "]", "PLAY", "CONNECT", "INTO", "LAYER", "/", "MELODY:"
         , "REST", "CHORD:", "CREATE", "BPM:", "&", "DEF", "RUN", "{", "}", "(", ")");
         Tokenizer.makeTokenizer("input.music",literals);
         PROGRAM program = new PROGRAM();

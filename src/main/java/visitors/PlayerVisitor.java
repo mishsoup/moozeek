@@ -71,7 +71,7 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(INSTRUMENT instrument) {
-        return null;
+        return instrument.getInstrument();
     }
 
     @Override
