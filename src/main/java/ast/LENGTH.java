@@ -8,7 +8,7 @@ public class LENGTH extends Node {
     private String length;
     public String pattern = "[s|i|q|h|w]";
 
-    public String getPattern() {
+    public String get() {
         return pattern;
     }
 

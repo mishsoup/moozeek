@@ -77,7 +77,8 @@ public class PlayerVisitor implements Visitor<String>{
         int nameListSize = names.size();
         Pattern song = new Pattern();
         for (int i = 0; i < nameListSize ; i++) {
-            song.add(names.get(i).accept(this));
+            Pattern pattern = musicCreator.getSound(names.get(i).getName());
+            song.add(pattern);
         }
         musicCreator.addMusicToSongs(connect.getNewName().getName(), song);
         //TODO remove this line, only for debugging
@@ -87,7 +88,7 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(LENGTH length) {
-        return null;
+        return length.getLength();
     }
 
     @Override
@@ -193,6 +194,9 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(FUNC func) {
+        String name = func.getName();
+        FUNCBODY funcbody = func.getFuncbody();
+        musicCreator.addFuncBodyToSongs(name, funcbody);
         return null;
     }
 
