@@ -1,6 +1,7 @@
 package ui;
 
 import ast.PROGRAM;
+import libs.MusicCreator;
 import libs.Tokenizer;
 import org.jfugue.pattern.Pattern;
 import org.jfugue.player.Player;
@@ -12,11 +13,11 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         List<String> literals = Arrays.asList(",", "[", "]", "PLAY", "CONNECT", "INTO", "LAYER", "/", "MELODY:"
-        , "REST", "CHORD:", "CREATE", "BPM:", "&", "DEF", "RUN", "{", "}", "(", ")");
+        , "REST", "CHORD:", "CREATE", "BPM:", "&", "DEF", "RUN", "{", "}", "(", ")", "REF");
         Tokenizer.makeTokenizer("input.music",literals);
         PROGRAM program = new PROGRAM();
         program.parse();
         PlayerVisitor pv = new PlayerVisitor();
-        program.accept(pv);
+        program.accept(pv, PlayerVisitor.environmentTable);
     }
 }

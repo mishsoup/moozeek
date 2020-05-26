@@ -10,38 +10,60 @@ import java.util.Map;
 public class MusicCreator {
 
     private static MusicCreator theMusicCreator;
-    private static final Map<String, Object> songs = new HashMap<String, Object>();
+    private static final Map<Integer, Object> memoryTable = new HashMap<Integer, Object>();
     private Player player = new Player();
+    private static Integer memoryAddress = 0;
+
+    public Integer getNewMemoryAddress() {
+        memoryAddress = memoryAddress + 1;
+        return memoryAddress;
+    }
 
     public Player getPlayer (){
         return player;
     }
 
-    public void addMusicToSongs(String name, Pattern pattern) {
-        songs.put(name, pattern);
+    public void addMusicToSongs(String name, Pattern pattern, Map<String, Integer> environmentTable) {
+        Integer address = null;
+        if (environmentTable.containsKey(name)) {
+            address = environmentTable.get(name);
+        } else {
+            address = getNewMemoryAddress();
+            environmentTable.put(name, address);
+        }
+        memoryTable.put(address, pattern);
     }
 
-    public void addFuncBodyToSongs(String name, FUNCBODY funcbody) {
-        songs.put(name,funcbody);
+    public void addFuncBodyToSongs(String name, FUNCBODY funcbody , Map<String, Integer> environmentTable) {
+        Integer address = null;
+        if (environmentTable.containsKey(name)) {
+            address = environmentTable.get(name);
+        } else {
+            address = getNewMemoryAddress();
+            environmentTable.put(name, address);
+        }
+        memoryTable.put(address, funcbody);
     }
 
-    public Pattern getSound(String name) {
-        if (!songs.containsKey(name)) {
+    public Pattern getSound(String name, Map<String, Integer> environmentTable) {
+        if (!environmentTable.containsKey(name)) {
             throw new RuntimeException("Song: " + name + " is not declared");
         }
-        return (Pattern) songs.get(name);
+        Integer address = environmentTable.get(name);
+        return (Pattern) memoryTable.get(address);
     }
 
-    public FUNCBODY getFuncbody(String name) {
-        if (!songs.containsKey(name)) {
+    public FUNCBODY getFuncbody(String name, Map<String, Integer> environmentTable) {
+        if (!environmentTable.containsKey(name)) {
             throw new RuntimeException("func: " + name + " is not declared");
         }
-        return (FUNCBODY) songs.get(name);
+        Integer address = environmentTable.get(name);
+        return (FUNCBODY) memoryTable.get(address);
     }
 
     // use for test case
     public int getSize() {
-        return songs.size();
+        return memoryTable.size();
     }
 
     // TODO wanted to use this but seems redundant, may need to delete later if never gets called

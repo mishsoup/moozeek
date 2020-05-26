@@ -35,7 +35,7 @@ public class RUN extends INSTRUCTION {
     }
 
     @Override
-    public <T> T accept(Visitor<T> visitor) {
-        return visitor.evaluate(this);
+    public <C, T> T accept(Visitor<C, T> visitor, C context) {
+        return visitor.evaluate(this, context);
     }
 }

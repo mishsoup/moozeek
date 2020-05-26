@@ -52,8 +52,8 @@ public class PROGRAM extends Node {
     }
 
     @Override
-    public <T> T accept(Visitor<T> visitor) {
-        return visitor.evaluate(this);
+    public <C, T> T accept(Visitor<C, T> visitor, C context) {
+        return visitor.evaluate(this, context);
     }
 
 
