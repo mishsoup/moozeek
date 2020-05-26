@@ -1,9 +1,12 @@
 START
+DEF repeat (song1, my) {
+  CONNECT song1, song1, song1 INTO my
+}
 BPM: 100,
 CREATE Music Guitar, [Piano, 4/4, MELODY: Es, D#s, Es, D#s, Es, B-1s, Ds, Cs, A-1q, C-1s, E-1s, A-1s, B-1q, E-1s, A-1s, B-1s, Cq]
-CREATE Music Piano, [Piano, 4/4, CHORD: CM-2q, REST siqhw, Dm+1q, Ew, F4s]
+CREATE Music Piano, [Piano, 4/4, CHORD: AbMs Bs Cs]
 LAYER Music Guitar, Music Piano INTO MusicGuitarAndPiano
 & do want I want &
-CONNECT Music Guitar, Music Piano INTO LayerTest
-, PLAY MusicGuitarAndPiano
+RUN repeat (Music Piano, my)
+, PLAY my
 

@@ -77,17 +77,18 @@ public class PlayerVisitor implements Visitor<String>{
         int nameListSize = names.size();
         Pattern song = new Pattern();
         for (int i = 0; i < nameListSize ; i++) {
-            song.add(names.get(i).accept(this));
+            Pattern pattern = musicCreator.getSound(names.get(i).getName());
+            song.add(pattern);
         }
         musicCreator.addMusicToSongs(connect.getNewName().getName(), song);
         //TODO remove this line, only for debugging
-        System.out.println(song);
+        //System.out.println(song);
         return null;
     }
 
     @Override
     public String evaluate(LENGTH length) {
-        return null;
+        return length.getLength();
     }
 
     @Override
@@ -167,21 +168,33 @@ public class PlayerVisitor implements Visitor<String>{
 
     @Override
     public String evaluate(BPM bpm) {
-        return null;
+        return bpm.getBpm();
     }
 
     @Override
     public String evaluate(COMMENT comment) {
-        return null;
+        return comment.getComment();
     }
 
     @Override
     public String evaluate(RUN run) {
+        String functionName = run.getFuncName();
+        List<String> paraValues = run.getParaNames();
+        FUNCBODY funcbody = musicCreator.getFuncbody(functionName);
+        List<String> paraNames = funcbody.getParaNames();
+        for (int i = 0; i < paraNames.size(); i++) {
+            Pattern pattern = musicCreator.getSound(paraValues.get(i));
+            musicCreator.addMusicToSongs(paraNames.get(i), pattern);
+        }
+        funcbody.accept(this);
         return null;
     }
 
     @Override
     public String evaluate(FUNC func) {
+        String name = func.getName();
+        FUNCBODY funcbody = func.getFuncbody();
+        musicCreator.addFuncBodyToSongs(name, funcbody);
         return null;
     }
 

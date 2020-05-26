@@ -22,6 +22,7 @@ public class RUN extends INSTRUCTION {
         tokenizer.getAndCheckNext("RUN");
         funcName = tokenizer.getNext();
         if (tokenizer.checkToken("\\(")) {
+            tokenizer.getAndCheckNext("\\(");
             String name1 = tokenizer.getNext();
             paraNames.add(name1);
             while (tokenizer.checkToken("\\,")) {
