@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PlayerVisitor implements Visitor<String>{
     static protected MusicCreator musicCreator = MusicCreator.getMusicCreator();
-    private int defaultBPM;
+    private int defaultBPM = 100;
 
     @Override
     public String evaluate(PLAY play) {
@@ -118,8 +118,6 @@ public class PlayerVisitor implements Visitor<String>{
         for (FUNC eachFunc: program.getFuncs()) {
             eachFunc.accept(this);
         }
-        BPM bpm = program.getBpm();
-        defaultBPM = Integer.parseInt(bpm.getBpm());
         for (INSTRUCTION eachInstruction: program.getInstructions()) {
             eachInstruction.accept(this);
         }
