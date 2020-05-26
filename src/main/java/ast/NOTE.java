@@ -7,7 +7,7 @@ public class NOTE extends BASEKEY {
     @Override
     public void parse() {
         String wholeNote = tokenizer.getNext();
-        int sharpOrbIndex = getIndexOfSharpOrb(wholeNote);
+        int sharpOrbIndex = getIndex(wholeNote, "#", "b");
         int octaveIndex = getIndex(wholeNote, "+", "-");
         int lengthsIndex;
         if (sharpOrbIndex > 0) {
@@ -21,13 +21,12 @@ public class NOTE extends BASEKEY {
             setOctave(wholeNote.substring(octaveIndex, octaveIndex + 2));
             lengthsIndex = octaveIndex + 2;
         }
-        setLengths(wholeNote.substring(lengthsIndex));
-    }
-
-    private int getIndexOfSharpOrb(String str) {
-        int indexOfSharp = str.indexOf("#");
-        int indexOfb = str.indexOf("b");
-        return Math.max(indexOfSharp, indexOfb);
+        String lengths = wholeNote.substring(lengthsIndex);
+        if (isCorrectInput(pattern, lengths)) {
+            setLengths(wholeNote.substring(lengthsIndex));
+        } else {
+            throw new RuntimeException("The LENGTH in NOTE should only have: " + pattern + ". But input is " + lengths);
+        }
     }
 
     @Override

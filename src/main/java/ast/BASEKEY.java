@@ -7,7 +7,7 @@ public abstract class BASEKEY extends Node {
     private String theNote = null;
     private String lengths = null;
     private String octave = null;
-    public String pattern = "[s|i|q|h|w]";
+    public String pattern = "[s|i|q|h|w]+";
 
     //getter
     public String getLengths() {

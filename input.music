@@ -3,7 +3,7 @@ DEF repeat (song1, my) {
 }
 ,
 CREATE Music Guitar, [Piano, 4/4, MELODY: Es, D#s, Es, D#s, Es, B-1s, Ds, Cs, A-1q, C-1s, E-1s, A-1s, B-1q, E-1s, A-1s, B-1s, Cq]
-CREATE Music Piano, [Piano, 4/4, CHORD: AbMs Bs Cs]
+CREATE Music Piano, [Piano, 4/4, CHORD: AbMsiw, Bs, Cs]
 LAYER Music Guitar, Music Piano INTO MusicGuitarAndPiano
 & do want I want &
 RUN repeat (Music Piano, Music Piano)

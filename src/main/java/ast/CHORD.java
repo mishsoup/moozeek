@@ -24,7 +24,12 @@ public class CHORD extends BASEKEY {
             setOctave(wholeNote.substring(octaveIndex, octaveIndex + 2));
             lengthsIndex = octaveIndex + 2;
         }
-        setLengths(wholeNote.substring(lengthsIndex));
+        String lengths = wholeNote.substring(lengthsIndex);
+        if (isCorrectInput(pattern, lengths)) {
+            setLengths(lengths);
+        } else {
+            throw new RuntimeException("The LENGTH in CHORD should only have: " + pattern + ". But input is " + lengths);
+        }
     }
 
     @Override

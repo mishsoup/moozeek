@@ -7,7 +7,12 @@ public class REST extends BASEKEY {
     public void parse() {
         tokenizer.getAndCheckNext("REST");
         setTheNote("REST");
-        setLengths(tokenizer.getNext());
+        String lengths = tokenizer.getNext();
+        if (isCorrectInput(pattern, lengths)) {
+            setLengths(tokenizer.getNext());
+        } else {
+            throw new RuntimeException("The LENGTH in REST should only have: " + pattern + ". But input is " + lengths);
+        }
     }
 
     @Override
