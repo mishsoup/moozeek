@@ -35,7 +35,7 @@ __/* RHYTHMS */__
 BEAT ::= COUNTS “/“ COUNTVALUE   
 BPM ::= “BPM: ” [1 - 200]  
 COUNTS ::= [1-8]  
-COUNTVALUE ::= 16 | 8| 4| 2  
+COUNTVALUE ::= 16|8|4|2  
   
   
 ------------------------------  
