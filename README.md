@@ -4,7 +4,7 @@
 __EBNF:__<br/>
 
 __/* OVERALL PROGRAM CONTROL */__   
-PROGRAM ::=  FUNC* INSTRUCTION+ [“,” PLAY]?  
+PROGRAM ::=  FUNC* INSTRUCTION+ (“,” PLAY)?  
 INSTRUCTION ::= CREATE | CONNECT | LAYER | COMMENT | RUN  
 FUNC ::= “DEF” NAME FUNCBODY  
 FUNCBODY::= ( “(“ “REF”? NAME (“,” “REF”? NAME)* “)”  )?  “{“ INSTRUCTION+ “}”  
@@ -23,11 +23,11 @@ __/* SOUND */__
 BASESOUND ::= MELODY | CHORDPROGRESSION  
 INSTRUMENT ::= “Guitar” | “Piano” | … etc  
 BASEKEY ::= NOTE | CHORD | REST  
-MELODY ::= “MELODY:” ((NOTE | REST) (“,” (NOTE | REST))*)?  
+MELODY ::= “MELODY:” ((NOTE | REST) (“,” (NOTE | REST))\*)?  
 REST ::= “REST” LENGTH+   
 NOTE ::=  [A-G][# | b]? OCTAVE?  LENGTH+  
 LENGTH ::= s | i | q | h | w  
-CHORDPROGRESSION ::= “CHORD:” ((CHORD | REST) (“,” (CHORD | REST))*)?  
+CHORDPROGRESSION ::= “CHORD:” ((CHORD | REST) (“,” (CHORD | REST))\*)?  
 CHORD :: =  [A-G][# | b]?[M|m]? OCTAVE?   LENGTH+   
 OCTAVE ::= (- | +) [1-5]    
   
