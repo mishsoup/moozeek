@@ -27,7 +27,7 @@ MELODY ::= “MELODY:” [NOTE | REST] (“,” [NOTE | REST])\*
 REST ::= “REST” LENGTH+   
 NOTE ::=  [A-G][# | b]? OCTAVE?  LENGTH+  
 LENGTH ::= s | i | q | h | w  
-CHORDPROGRESSION ::= “CHORD:” [CHORD | REST] (“,” [CHORD | REST])\* 
+CHORDPROGRESSION ::= “CHORD:” [CHORD | REST] (“,” [CHORD | REST])\*   
 CHORD :: =  [A-G][# | b]?[M|m]? OCTAVE?   LENGTH+   
 OCTAVE ::= [-|+] [1-5]    
   
