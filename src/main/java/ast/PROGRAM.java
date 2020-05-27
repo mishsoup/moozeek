@@ -24,7 +24,6 @@ public class PROGRAM extends Node {
             func.parse();
             funcs.add(func);
         }
-        tokenizer.getAndCheckNext(",");
         while(tokenizer.moreTokens() && !tokenizer.checkToken(",")) {
             INSTRUCTION instruction = null;
             if (tokenizer.checkToken("CONNECT")) {

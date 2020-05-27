@@ -1,6 +1,11 @@
-PROGRAM ::= “START” BPM “,” INSTRUCTION+ [“,” PLAY]?
-INSTRUCTION ::= CREATE | CONNECT | LAYER | COMMENT
-COMMENT ::= “//” STRING “//”
+/* OVERALL PROGRAM CONTROL */ 
+
+PROGRAM ::=  FUNC*  “,” INSTRUCTION+ [“,” PLAY]?
+INSTRUCTION ::= CREATE | CONNECT | LAYER | COMMENT | RUN
+FUNC ::= “DEF” NAME FUNCBODY
+FUNCBODY::= ( “(“ “REF”? NAME (“,” “REF”? NAME)* “)”  )?  “{“ INSTRUCTION+ “}”
+RUN ::=  “RUN” NAME ( “(“ NAME  (“,” NAME)* ”)” )?
+COMMENT ::= “&” STRING “&”
 PLAY ::= “PLAY” NAME 
 CONNECT ::= “CONNECT“  NAME (“,” NAME)+ “INTO” NAME
 LAYER::= “LAYER” NAME (“,” NAME)+ “INTO” NAME
@@ -9,23 +14,32 @@ LAYER::= “LAYER” NAME (“,” NAME)+ “INTO” NAME
 CREATE ::= “CREATE“  NAME “,”  SOUND
 NAME ::=  STRING
 SOUND ::= “[“ INSTRUMENT “,” BEAT [“,” BPM]? “,” BASESOUND “]”
-	/* SOUND */
+
+/* SOUND */
 BASESOUND ::= MELODY | CHORDPROGRESSION
-	INSTRUMENT ::= “Guitar” | “Piano” | … etc
-            BASEKEY ::= NOTE | CHORD | REST
+INSTRUMENT ::= “Guitar” | “Piano” | … etc
+BASEKEY ::= NOTE | CHORD | REST
 MELODY ::= “MELODY:” ((NOTE | REST) (“,” (NOTE | REST))*
 
-REST ::= “R” LENGTH+ 
-(One Token) NOTE ::=  [A-G][# | b]?[M|m]? OCTAVE?  LENGTH+
-		q.
-		q     | q       | q          | *      | o
+REST ::= “REST” LENGTH+ 
+(One Token) NOTE ::=  [A-G][# | b]? OCTAVE?  LENGTH+
 LENGTH ::= s | i | q | h | w
 CHORDPROGRESSION ::= “CHORD:” ((CHORD | REST) (“,” (CHORD | REST))*
-CHORD :: =  [A-G][M|m]? OCTAVE?   LENGTH+ 
+CHORD :: =  [A-G][# | b]?[M|m]? OCTAVE?   LENGTH+ 
 OCTAVE ::= (- | +) [1-5]  
 
-	/* RHYTHMS */
+/* RHYTHMS */
 BEAT ::= COUNTS “/“ COUNTVALUE 
 BPM ::= “BPM: ” [1 - 200]
 COUNTS ::= [1-8]
 COUNTVALUE ::= 16 | 8| 4| 2
+
+
+
+------------------------------
+Abbreviations for length:
+s    = sixteenth
+i    = eighth
+q   = quarter
+q   = half
+w  = whole
