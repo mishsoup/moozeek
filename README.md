@@ -65,7 +65,7 @@ CREATE Simpsons, [Violin, 4/4, BPM: 90, MELODY: Fi, Aq, Bi, D+1i, C+1q, Ai, Fq, 
 CREATE Fur Elise, [Piano, 4/4,  BPM: 80, MELODY: Es, D#s, Es, D#s, Es, B-1s, Ds, Cs, A+3q, C-1s, E-1s, A-1s, B-1q, E-1s, A-1s, B-1s, Cq]  
   
 & Empty Song &  
-CREATE My Song, [Piano, 4/4, MELODY: Rs]  
+CREATE My Song, [Piano, 4/4, MELODY: RESTs]  
   
 & Call repeat method on Simpsons and store into My Song &  
 RUN repeat(Simpsons, My Song)  
@@ -74,5 +74,3 @@ RUN LayertTwoSongsAndRpeatTwice(Simpsons, Fur Elise, My Song)
 & Play the music created &  
 ,  
 PLAY My Song  
-
-
