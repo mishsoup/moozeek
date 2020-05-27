@@ -17,7 +17,7 @@ LAYER::= “LAYER” NAME (“,” NAME)+ “INTO” NAME
 __/* SONG COMPOSURE */__  
 CREATE ::= “CREATE“  NAME “,”  SOUND  
 NAME ::=  STRING  
-SOUND ::= “[“ INSTRUMENT “,” BEAT [“,” BPM]? “,” BASESOUND “]”  
+SOUND ::= “[“ INSTRUMENT “,” BEAT (“,” BPM)? “,” BASESOUND “]”  
 
 __/* SOUND */__  
 BASESOUND ::= MELODY | CHORDPROGRESSION  
