@@ -1,4 +1,4 @@
-DEF repeat  {
+DEF repeat (song1,  REF my , song2 ) {
   CONNECT song1, song2 INTO my
 }
 ,
@@ -6,7 +6,7 @@ CREATE Music Guitar, [Piano, 2/8,  BPM: 200, MELODY: Es, D#s, Es, D#s, Es, B-1s,
 CREATE Music Piano, [Piano, 4/4, CHORD: AbMsiw, Bs, Cs]
 LAYER Music Guitar, Music Piano INTO MusicGuitarAndPiano
 & do want I want &
-RUN repeat
+RUN repeat (Music Piano, Music Piano, Music Guitar)
 ,
 PLAY Music Piano
 

@@ -30,7 +30,7 @@ public class NOTE extends BASEKEY {
         if (isCorrectInput(lengthPattern, lengths)) {
             setLengths(wholeNote.substring(lengthsIndex));
         } else {
-            throw new RuntimeException("The LENGTH in NOTE should only have: " + lengthPattern + ". But input is " + lengths);
+            throw new RuntimeException("The LENGTH in NOTE should only have: " + lengthPattern + ". But input is " + lengths + " .");
         }
     }
 

@@ -204,8 +204,8 @@ public class PlayerVisitor implements Visitor<Map<String, Integer>, String>{
         }
         funcbody.accept(this, funEnv);
 
-        // TODO we need to clean the memory which point by funEnv
-        // TODO 1) find out all not REF parameters' address
+        // we need to clean the memory which point by funEnv
+        // 1) find out all not REF parameters' address
         Map<String, Boolean> funcScopeTable = funcbody.getTableForCheckScope();
         List<String> nonRefName = new ArrayList<>();
         for (Map.Entry<String,Boolean> entry : funcScopeTable.entrySet()) {
@@ -218,7 +218,7 @@ public class PlayerVisitor implements Visitor<Map<String, Integer>, String>{
             nonRefAddress.add(funEnv.get(eachName));
         }
 
-        // TODO 2) use this address delete it in memoryTable
+        // 2) use this address delete it in memoryTable
         for (Integer eachAddress: nonRefAddress) {
             musicCreator.getMemoryTable().remove(eachAddress);
         }
