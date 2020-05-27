@@ -4,7 +4,7 @@
 __EBNF:__<br/>
 
 __/* OVERALL PROGRAM CONTROL */__   
-PROGRAM ::=  FUNC* INSTRUCTION+ [“,” PLAY]?  
+PROGRAM ::=  FUNC* INSTRUCTION+ (“,” PLAY)?  
 INSTRUCTION ::= CREATE | CONNECT | LAYER | COMMENT | RUN  
 FUNC ::= “DEF” NAME FUNCBODY  
 FUNCBODY::= ( “(“ “REF”? NAME (“,” “REF”? NAME)* “)”  )?  “{“ INSTRUCTION+ “}”  
@@ -17,19 +17,19 @@ LAYER::= “LAYER” NAME (“,” NAME)+ “INTO” NAME
 __/* SONG COMPOSURE */__  
 CREATE ::= “CREATE“  NAME “,”  SOUND  
 NAME ::=  STRING  
-SOUND ::= “[“ INSTRUMENT “,” BEAT [“,” BPM]? “,” BASESOUND “]”  
+SOUND ::= “[“ INSTRUMENT “,” BEAT (“,” BPM)? “,” BASESOUND “]”  
 
 __/* SOUND */__  
 BASESOUND ::= MELODY | CHORDPROGRESSION  
 INSTRUMENT ::= “Guitar” | “Piano” | … etc  
 BASEKEY ::= NOTE | CHORD | REST  
-MELODY ::= “MELODY:” ((NOTE | REST) (“,” (NOTE | REST))*)?  
+MELODY ::= “MELODY:” [NOTE | REST] (“,” [NOTE | REST])\*  
 REST ::= “REST” LENGTH+   
 NOTE ::=  [A-G][# | b]? OCTAVE?  LENGTH+  
 LENGTH ::= s | i | q | h | w  
-CHORDPROGRESSION ::= “CHORD:” ((CHORD | REST) (“,” (CHORD | REST))*)?  
+CHORDPROGRESSION ::= “CHORD:” [CHORD | REST] (“,” [CHORD | REST])\*   
 CHORD :: =  [A-G][# | b]?[M|m]? OCTAVE?   LENGTH+   
-OCTAVE ::= (- | +) [1-5]    
+OCTAVE ::= [-|+] [1-5]    
   
 __/* RHYTHMS */__  
 BEAT ::= COUNTS “/“ COUNTVALUE   
@@ -65,7 +65,7 @@ CREATE Simpsons, [Violin, 4/4, BPM: 90, MELODY: Fi, Aq, Bi, D+1i, C+1q, Ai, Fq, 
 CREATE Fur Elise, [Piano, 4/4,  BPM: 80, MELODY: Es, D#s, Es, D#s, Es, B-1s, Ds, Cs, A+3q, C-1s, E-1s, A-1s, B-1q, E-1s, A-1s, B-1s, Cq]  
   
 & Empty Song &  
-CREATE My Song, [Piano, 4/4, MELODY: ]  
+CREATE My Song, [Piano, 4/4, MELODY: Rs]  
   
 & Call repeat method on Simpsons and store into My Song &  
 RUN repeat(Simpsons, My Song)  
