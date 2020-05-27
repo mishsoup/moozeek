@@ -9,7 +9,7 @@ public class REST extends BASEKEY {
         setTheNote("REST");
         String lengths = tokenizer.getNext();
         if (isCorrectInput(lengthPattern, lengths)) {
-            setLengths(tokenizer.getNext());
+            setLengths(lengths);
         } else {
             throw new RuntimeException("The LENGTH in REST should only have: " + lengthPattern + ". But input is " + lengths);
         }

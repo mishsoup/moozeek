@@ -1,10 +1,7 @@
 package ui;
 
 import ast.PROGRAM;
-import libs.MusicCreator;
 import libs.Tokenizer;
-import org.jfugue.pattern.Pattern;
-import org.jfugue.player.Player;
 import visitors.PlayerVisitor;
 
 import java.util.Arrays;
