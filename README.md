@@ -53,7 +53,7 @@ DEF repeat (REF SongToRepeat, REF StoreHere) {
   CONNECT SongToRepeat, SongToRepeat INTO StoreHere  
 }  
 
-DEF LayertTwoSongsAndRpeatTwice (REF song1, REF song2, REF StoreHere) {  
+DEF LayertTwoSongsAndRpeatTwice (song1, song2, REF StoreHere) {  
   LAYER song1, song2 INTO StoreHere  
   CONNECT StoreHere, StoreHere INTO StoreHere  
 }  
