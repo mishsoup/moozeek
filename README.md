@@ -44,4 +44,35 @@ s    = sixteenth
 i    = eighth  
 q   = quarter  
 q   = half  
-w  = whole  
+w  = whole    
+  
+------------------------------      
+__Sample Code:__  
+  
+DEF repeat (REF SongToRepeat, REF StoreHere) {  
+  CONNECT SongToRepeat, SongToRepeat INTO StoreHere  
+}  
+
+DEF LayertTwoSongsAndRpeatTwice (REF song1, REF song2, REF StoreHere) {  
+  LAYER song1, song2 INTO StoreHere  
+  CONNECT StoreHere, StoreHere INTO StoreHere  
+}  
+  
+& Simpsons &  
+CREATE Simpsons, [Violin, 4/4, BPM: 90, MELODY: Fi, Aq, Bi, D+1i, C+1q, Ai, Fq, Di, Cbq]  
+  
+& Fur Elise &  
+CREATE Fur Elise, [Piano, 4/4,  BPM: 80, MELODY: Es, D#s, Es, D#s, Es, B-1s, Ds, Cs, A+3q, C-1s, E-1s, A-1s, B-1q, E-1s, A-1s, B-1s, Cq]  
+  
+& Empty Song &  
+CREATE My Song, [Piano, 4/4, MELODY: ]  
+  
+& Call repeat method on Simpsons and store into My Song &  
+RUN repeat(Simpsons, My Song)  
+& Call LayertTwoSongsAndRpeatTwice method on Simpsons and Fur Elise and store into My Song &  
+RUN LayertTwoSongsAndRpeatTwice(Simpsons, Fur Elise, My Song)  
+& Play the music created &  
+,  
+PLAY My Song  
+
+
