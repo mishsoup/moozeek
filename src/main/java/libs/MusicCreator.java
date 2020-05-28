@@ -14,6 +14,7 @@ public class MusicCreator {
     private Player player = new Player();
     private static Integer memoryAddress = 0;
 
+
     public Integer getNewMemoryAddress() {
         memoryAddress = memoryAddress + 1;
         return memoryAddress;
@@ -25,6 +26,17 @@ public class MusicCreator {
 
     public Player getPlayer (){
         return player;
+    }
+
+    public void addObjectToSongs(String name, Object object, Map<String, Integer> environmentTable) {
+        Integer address = null;
+        if (environmentTable.containsKey(name)) {
+            address = environmentTable.get(name);
+        } else {
+            address = getNewMemoryAddress();
+            environmentTable.put(name, address);
+        }
+        memoryTable.put(address, object);
     }
 
     public void addMusicToSongs(String name, Pattern pattern, Map<String, Integer> environmentTable) {
@@ -47,6 +59,14 @@ public class MusicCreator {
             environmentTable.put(name, address);
         }
         memoryTable.put(address, funcbody);
+    }
+
+    public Object getObject(String name, Map<String, Integer> environmentTable) {
+        if (!environmentTable.containsKey(name)) {
+            throw new RuntimeException("Song Error: " + name + " is not declared. \n");
+        }
+        Integer address = environmentTable.get(name);
+        return (Object) memoryTable.get(address);
     }
 
     public Pattern getSound(String name, Map<String, Integer> environmentTable) {

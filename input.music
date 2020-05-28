@@ -7,19 +7,41 @@ DEF LayertTwoSongsAndRpeatTwice (song1, song2, REF StoreHere) {
   CONNECT StoreHere, StoreHere INTO StoreHere
 }
 
+DEF JoinOdeToJoy (repeat, firstend, secondend, REF StoreHere, REF procedure) {
+  CONNECT repeat, firstend, repeat, secondend INTO StoreHere
+  RUN procedure (StoreHere, StoreHere)
+}
+
 & Simpsons &
-CREATE Simpsons, [Violin, 4/4, BPM: 90, MELODY: Fi, Aq, Bi, D+1i, C+1q, Ai, Fq, Di, Cbq]
+CREATE Simpsons, [Violin, 4/4, BPM: 90, MELODY: Fi, RESTs, RESTs, Aq, Bi, D+1i, C+1q, Ai, Fq, Di, Cbq]
 
 & Fur Elise &
-CREATE Fur Elise, [Piano, 4/4,  BPM: 80, MELODY: Es, D#s, Es, D#s, Es, B-1s, Ds, Cs, A+3q, C-1s, E-1s, A-1s, B-1q, E-1s, A-1s, B-1s, Cq]
+CREATE Fur Elise, [Piano, 4/4,  BPM: 80, MELODY: Es, D#s, Es, D#s, Es, B-1s, Ds, Cs, A-1q, C-1s, E-1s, A-1s, B-1q, E-1s, A-1s, B-1s, Cq]
+
+& Ode to Joy RepeatPart &
+CREATE Ode to Joy RepeatPart, [Piano, 4/4,  BPM: 50, MELODY: Es, Es, Fs, Gs, Gs, Fs, Es, Ds, Cs, Cs, Ds, Es]
+
+& Ode to Joy First &
+CREATE Ode to Joy First, [Piano, 4/4, BPM: 50, MELODY: Es, Ds, Dq]
+
+& Ode to Joy Second &
+CREATE Ode to Joy Second, [Piano, 4/4, BPM: 50, MELODY: Ds, Cs, Cq]
 
 & Empty Song &
 CREATE My Song, [Piano, 4/4, MELODY: RESTs]
 
+& Empty Song #2 &
+CREATE My Second Song, [Piano, 4/4, MELODY: RESTs]
+
+& Join Ode to Joy &
+RUN JoinOdeToJoy (Ode to Joy RepeatPart, Ode to Joy First, Ode to Joy Second, My Second Song, repeat)
+
 & Call repeat method on Simpsons and store into My Song &
 RUN repeat(Simpsons, My Song)
+
 & Call LayertTwoSongsAndRpeatTwice method on Simpsons and Fur Elise and store into My Song &
 RUN LayertTwoSongsAndRpeatTwice(Simpsons, Fur Elise, My Song)
+
 & Play the music created &
 ,
-PLAY My Song
+PLAY My Second Song

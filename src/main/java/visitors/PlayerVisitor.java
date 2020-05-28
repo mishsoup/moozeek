@@ -195,12 +195,13 @@ public class PlayerVisitor implements Visitor<Map<String, Integer>, String>{
             String inputValueName = paraValues.get(i);
             String paraName = paraNames.get(i);
 
-            Pattern pattern = musicCreator.getSound(inputValueName, envTable);
+            Object object = musicCreator.getObject(inputValueName, envTable);
             if (funcbody.getTableForCheckScope().get(paraName)) {
                 Integer oldAddress = envTable.get(inputValueName);
                 funEnv.put(paraName, oldAddress);
             }
-            musicCreator.addMusicToSongs(paraName, pattern, funEnv);
+
+            musicCreator.addObjectToSongs(paraName, object, funEnv);
         }
         funcbody.accept(this, funEnv);
 
