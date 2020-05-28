@@ -10,6 +10,9 @@ import java.util.List;
 
 public class Tokenizer {
 
+    // The whole Tokenizer class is taken from Alex's code in class, as approved by our
+    // project mentor TA Ali
+
 
     private static String program;
     private static List<String> literals;
