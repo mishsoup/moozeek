@@ -1,5 +1,7 @@
 # Moozeek (A music DSL)- CPSC 410 Group project
-![Moozeek](https://user-images.githubusercontent.com/31344971/82974722-80e74000-9f8f-11ea-890b-f9b5acb3884c.jpg)
+![Moozeek](https://user-images.githubusercontent.com/31344971/83210120-e44bac00-a10e-11ea-957c-ea2bd8fd3662.png)
+
+_*Note: The whole tokenizer class is taken from Alex's code posted in the lectures as approved by our project TA Ali._
 
 __EBNF:__<br/>
 
