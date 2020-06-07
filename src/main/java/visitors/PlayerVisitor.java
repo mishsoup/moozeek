@@ -1,7 +1,6 @@
 package visitors;
 
 import ast.*;
-import exceptions.WrongNameException;
 import libs.MusicCreator;
 import org.jfugue.pattern.Pattern;
 import org.jfugue.pattern.PatternProducer;
