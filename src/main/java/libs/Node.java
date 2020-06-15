@@ -1,6 +1,5 @@
 package libs;
 
-import exceptions.DuplicateNameException;
 import visitors.Visitor;
 
 import java.util.regex.Pattern;
